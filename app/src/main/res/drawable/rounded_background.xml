@@ -1,0 +1,5 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/white"/> <!-- hoặc màu nền tùy bạn -->
+    <corners android:radius="16dp"/> <!-- góc bo tròn -->
+</shape>
