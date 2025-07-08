@@ -12,14 +12,159 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="4dp"
+            android:fontFamily="cursive"
+            android:text="Where Pets Are Family"
+            android:textColor="@android:color/black"
+            android:textSize="33sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ViewFlipper
+            android:id="@+id/viewFlipper"
+            android:layout_width="375dp"
+            android:layout_height="167dp"
+            android:layout_marginTop="16dp"
+            android:autoStart="true"
+            android:background="@drawable/rounded_background"
+            android:clipToOutline="true"
+            android:flipInterval="5000"
+            android:inAnimation="@android:anim/fade_in"
+            android:outAnimation="@android:anim/slide_in_left"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_title">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="164dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bong" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/miu" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bi" />
+
+        </ViewFlipper>
+
+
+        <ImageButton
+            android:id="@+id/btn_grooming"
+            android:layout_width="63dp"
+            android:layout_height="59dp"
+            android:layout_marginTop="76dp"
+            android:background="@drawable/circle_background"
+            android:scaleType="centerInside"
+            app:layout_constraintEnd_toStartOf="@+id/btn_healthcare"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewFlipper"
+            app:srcCompat="@drawable/grooming" />
+
+        <ImageButton
+            android:id="@+id/btn_healthcare"
+            android:layout_width="63dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="76dp"
+            android:background="@drawable/circle_background"
+            android:scaleType="centerInside"
+            app:layout_constraintEnd_toStartOf="@+id/btn_boarding"
+            app:layout_constraintStart_toEndOf="@id/btn_grooming"
+            app:layout_constraintTop_toBottomOf="@id/viewFlipper"
+            app:srcCompat="@drawable/care" />
+
+        <ImageButton
+            android:id="@+id/btn_boarding"
+            android:layout_width="59dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="76dp"
+            android:background="@drawable/circle_background"
+            android:scaleType="centerInside"
+            app:layout_constraintEnd_toStartOf="@+id/btn_service_shop"
+            app:layout_constraintStart_toEndOf="@id/btn_healthcare"
+            app:layout_constraintTop_toBottomOf="@id/viewFlipper"
+            app:srcCompat="@drawable/grooming" />
+
+        <ImageButton
+            android:id="@+id/btn_service_shop"
+            android:layout_width="63dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="76dp"
+            android:background="@drawable/circle_background"
+            android:scaleType="centerInside"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_boarding"
+            app:layout_constraintTop_toBottomOf="@id/viewFlipper"
+            app:srcCompat="@drawable/care" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Grooming"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/btn_grooming"
+            app:layout_constraintStart_toStartOf="@id/btn_grooming"
+            app:layout_constraintTop_toBottomOf="@id/btn_grooming" />
+
+        <TextView
+            android:id="@+id/textView_healthcare"
+            android:layout_width="55dp"
+            android:layout_height="21dp"
+            android:text="Medical"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/btn_healthcare"
+            app:layout_constraintStart_toStartOf="@id/btn_healthcare"
+            app:layout_constraintTop_toBottomOf="@id/btn_healthcare" />
+
+        <TextView
+            android:id="@+id/textView_boarding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Boarding"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/btn_boarding"
+            app:layout_constraintStart_toStartOf="@id/btn_boarding"
+            app:layout_constraintTop_toBottomOf="@id/btn_boarding" />
+
+        <TextView
+            android:id="@+id/textView_service_shop"
+            android:layout_width="77dp"
+            android:layout_height="21dp"
+            android:text="Shop"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/btn_service_shop"
+            app:layout_constraintStart_toStartOf="@id/btn_service_shop"
+            app:layout_constraintTop_toBottomOf="@id/btn_service_shop" />
+
+
+        <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="424dp"
+            android:layout_marginTop="428dp"
             android:text="Pet Profile"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.072"
+            app:layout_constraintHorizontal_bias="0.089"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,82 +172,14 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="232dp"
+            android:layout_marginTop="276dp"
             android:text="Pet Service"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.073"
+            app:layout_constraintHorizontal_bias="0.087"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/imgBtnCare"
-            android:layout_width="102dp"
-            android:layout_height="84dp"
-            android:layout_marginStart="76dp"
-            android:background="@drawable/circle_background"
-            android:scaleType="centerInside"
-            android:src="@drawable/care"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"
-            app:layout_constraintVertical_bias="0.093" />
-
-        <ImageButton
-            android:id="@+id/imgBtnGro"
-            android:layout_width="104dp"
-            android:layout_height="86dp"
-            android:layout_marginStart="32dp"
-            android:background="@drawable/circle_background"
-            android:scaleType="centerInside"
-            android:src="@drawable/grooming"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.185"
-            app:layout_constraintStart_toEndOf="@+id/imgBtnCare"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"
-            app:layout_constraintVertical_bias="0.088" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="92dp"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:text="Health Care"
-            android:textStyle="bold|italic"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgBtnCare" />
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="77dp"
-            android:layout_height="22dp"
-            android:layout_marginStart="76dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="92dp"
-            android:gravity="center"
-            android:text="Grooming"
-            android:textStyle="bold|italic"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/textView5"
-            app:layout_constraintTop_toBottomOf="@+id/imgBtnGro" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclePetView"
-            android:layout_width="360dp"
-            android:layout_height="240dp"
-            android:layout_marginStart="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginBottom="2dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.489"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4"
-            app:layout_constraintVertical_bias="0.282" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

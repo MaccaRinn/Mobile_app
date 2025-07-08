@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".grooming">
+
+
+        <!-- Thêm các nút dịch vụ mẫu -->
+
+        <ViewFlipper
+            android:id="@+id/viewFlipper"
+            android:layout_width="375dp"
+            android:layout_height="167dp"
+            android:layout_marginTop="16dp"
+            android:autoStart="true"
+            android:background="@drawable/rounded_background"
+            android:clipToOutline="true"
+            android:flipInterval="5000"
+            android:inAnimation="@android:anim/fade_in"
+            android:outAnimation="@android:anim/slide_in_left"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/grooming_title">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="164dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/miu" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bong" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bi" />
+        </ViewFlipper>
+
+        <TextView
+            android:id="@+id/grooming_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Chọn dịch vụ Grooming"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_grooming_service"
+        android:layout_width="63dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/circle_background"
+        android:scaleType="centerInside"
+        android:text="Cắt tỉa cơ bản"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.258"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewFlipper"
+        app:srcCompat="@drawable/grooming" />
+
+    <ImageButton
+        android:id="@+id/btn_grooming_list"
+        android:layout_width="63dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/circle_background"
+        android:scaleType="centerInside"
+        android:text="Cắt tỉa cơ bản"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.741"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewFlipper"
+        app:srcCompat="@drawable/grooming" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Service"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/btn_grooming_service"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="@+id/btn_grooming_service"
+        app:layout_constraintTop_toBottomOf="@+id/btn_grooming_service" />
+
+    <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="List"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/btn_grooming_list"
+            app:layout_constraintStart_toStartOf="@+id/btn_grooming_list"
+            app:layout_constraintTop_toBottomOf="@+id/btn_grooming_list" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="409dp"
+        android:layout_height="398dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
