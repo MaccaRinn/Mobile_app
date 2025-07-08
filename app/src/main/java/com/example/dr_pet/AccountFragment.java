@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dr_pet.Model.Account;
@@ -94,6 +95,8 @@ public class AccountFragment extends Fragment {
         EditText edtFName = view.findViewById(R.id.edtFName);
         EditText edtLName = view.findViewById(R.id.edtLName);
         EditText edtAdr = view.findViewById(R.id.edtAdr);
+        TextView txtEmail = view.findViewById(R.id.txtEmail);
+
 
         String uid = FirebaseAuth.getInstance().getUid();
         if (uid != null){
@@ -104,6 +107,7 @@ public class AccountFragment extends Fragment {
                         if(dataSnapshot.exists()){
                             Account account = dataSnapshot.getValue(Account.class);
                             if (account != null){
+                                txtEmail.setText(auth.getCurrentUser().getEmail());
                                 edtAdr.setText(account.getAddress());
                                 edtFName.setText(account.getFirstName());
                                 edtLName.setText(account.getLastName());
@@ -125,7 +129,7 @@ public class AccountFragment extends Fragment {
                 mGoogleSignInClient.signOut();
                 SessionManager.isLogged = false;
                 startActivity(new Intent(getActivity(),HomeActivity.class));
-                Toast.makeText(getActivity(), "Đăng xuất", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Log out", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -135,12 +139,10 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Account currAccount = new Account();
-
                 String firstname = edtFName.getText().toString();
                 String lastname = edtLName.getText().toString();
                 String address = edtAdr.getText().toString();
                 String uid = FirebaseAuth.getInstance().getUid();
-
 
                 currAccount.setFirstName(firstname);
                 currAccount.setLastName(lastname);
@@ -149,10 +151,10 @@ public class AccountFragment extends Fragment {
                         .child(uid)
                         .setValue(currAccount)
                         .addOnSuccessListener(unused -> {
-                            Toast.makeText(getActivity(), "Thông tin tài khoản đã được lưu", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Account Detail have been saved", Toast.LENGTH_SHORT).show();
                         })
                         .addOnFailureListener(e -> {
-                            Toast.makeText(getActivity(), "Lỗi khi lưu: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "Error when save" + e.getMessage(), Toast.LENGTH_LONG).show();
                         });
 
             }

@@ -6,18 +6,30 @@ import com.google.firebase.auth.ActionCodeResult;
 
 public class Account {
 
-    private String userName;
     private String firstName;
     private String lastName;
     private String address;
 
 
-    public String getUserName() {
-        return userName;
+    public Account(String email, String userName, String firstName, String lastName, String address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public Account() {
+    }
+
+
+
+
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -28,14 +40,6 @@ public class Account {
         this.lastName = lastName;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -43,16 +47,4 @@ public class Account {
     public void setAddress(String address) {
         this.address = address;
     }
-
-    public Account() {
-    }
-
-    public Account(String accountId, String userName, String firstName, String address, String lastName) {
-        this.userName = userName;
-        this.firstName = firstName;
-        this.address = address;
-        this.lastName = lastName;
-    }
-
-
 }
