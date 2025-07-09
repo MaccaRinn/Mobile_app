@@ -1,16 +1,25 @@
-package com.example.dr_pet;
+package com.example.dr_pet.controller.Fragment;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.content.Intent;
-import android.view.View;
 import android.widget.ImageButton;
+
+import com.example.dr_pet.Model.Pet;
+import com.example.dr_pet.R;
+import com.example.dr_pet.controller.activity.Grooming;
+import com.example.dr_pet.controller.adapter.PetAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +36,12 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private RecyclerView petReView;
+
+    private PetAdapter petAdapter;
+
+    private List<Pet> petList;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -64,6 +79,25 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        petReView = view.findViewById(R.id.petRecylceViewHome);
+        petReView.setLayoutManager(new GridLayoutManager(getContext(),2));
+
+
+        petList = new ArrayList<>();
+
+        Pet newPet = new Pet();
+        newPet.setName("Bong");
+        newPet.setPetUrl(R.drawable.bong);
+        newPet.setGender("Female");
+        newPet.setSpecies("Cat");
+        newPet.setBrithDate();
+
+        petList.add(newPet);
+
+
+        petAdapter = new PetAdapter(petList, getContext());
+        petReView.setAdapter(petAdapter);
 
         ImageButton btnGrooming = view.findViewById(R.id.btn_grooming);
         btnGrooming.setOnClickListener(new View.OnClickListener() {

@@ -1,12 +1,21 @@
-package com.example.dr_pet;
+package com.example.dr_pet.controller.Fragment;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.dr_pet.Model.Pet;
+import com.example.dr_pet.R;
+import com.example.dr_pet.controller.adapter.PetAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +32,12 @@ public class PetFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private RecyclerView petRecylceView;
+    private PetAdapter petAdapter;
+
+    private List<Pet> petList;
+
 
     public PetFragment() {
         // Required empty public constructor
@@ -58,7 +73,26 @@ public class PetFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pet, container, false);
+
+        View view  = inflater.inflate(R.layout.fragment_pet, container, false);
+        petRecylceView = view.findViewById(R.id.petProfileRe);
+        petRecylceView.setLayoutManager(new GridLayoutManager(getContext(),2));
+
+        petList = new ArrayList<>();
+
+        Pet newPet = new Pet();
+        newPet.setName("Bong");
+        newPet.setPetUrl(R.drawable.bong);
+        newPet.setGender("Female");
+        newPet.setSpecies("Cat");
+        newPet.setBrithDate();
+
+
+//        petList.add(newPet);
+
+        petAdapter = new PetAdapter(petList, getContext());
+        petRecylceView.setAdapter(petAdapter);
+
+        return view;
     }
 }

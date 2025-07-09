@@ -9,7 +9,7 @@
     android:background="@drawable/mainbackground">
 
 
-        <!-- Thêm các nút dịch vụ mẫu -->
+    <!-- Thêm các nút dịch vụ mẫu -->
 
 
     <TextView
@@ -40,15 +40,15 @@
         app:srcCompat="@drawable/grooming" />
 
     <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="List"
-            android:textAlignment="center"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/btn_grooming_list"
-            app:layout_constraintStart_toStartOf="@+id/btn_grooming_list"
-            app:layout_constraintTop_toBottomOf="@+id/btn_grooming_list" />
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="List"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/btn_grooming_list"
+        app:layout_constraintStart_toStartOf="@+id/btn_grooming_list"
+        app:layout_constraintTop_toBottomOf="@+id/btn_grooming_list" />
 
 
     <androidx.cardview.widget.CardView

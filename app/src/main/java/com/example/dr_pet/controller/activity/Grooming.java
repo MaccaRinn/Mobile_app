@@ -1,4 +1,4 @@
-package com.example.dr_pet;
+package com.example.dr_pet.controller.activity;
 
 import android.os.Bundle;
 
@@ -10,6 +10,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 import android.content.Intent;
 import android.widget.ImageButton;
+
+import com.example.dr_pet.R;
+import com.example.dr_pet.ServiceOrderActivity;
 
 public class Grooming extends AppCompatActivity {
 

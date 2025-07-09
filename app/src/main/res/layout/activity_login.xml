@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/bgpet"
-    tools:context=".LoginActivity">
+    tools:context=".controller.activity.LoginActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

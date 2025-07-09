@@ -10,6 +10,8 @@ public class Account {
     private String lastName;
     private String address;
 
+    private String accUrl;
+
 
     public Account(String email, String userName, String firstName, String lastName, String address) {
         this.firstName = firstName;

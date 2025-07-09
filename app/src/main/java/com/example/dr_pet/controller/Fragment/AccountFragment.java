@@ -1,11 +1,10 @@
-package com.example.dr_pet;
+package com.example.dr_pet.controller.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,8 @@ import android.widget.Toast;
 
 import com.example.dr_pet.Model.Account;
 import com.example.dr_pet.Model.SessionManager;
+import com.example.dr_pet.R;
+import com.example.dr_pet.controller.activity.HomeActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -127,7 +128,7 @@ public class AccountFragment extends Fragment {
             public void onClick(View v) {
                 auth.signOut();
                 SessionManager.isLogged = false;
-                startActivity(new Intent(getActivity(),HomeActivity.class));
+                startActivity(new Intent(getActivity(), HomeActivity.class));
                 Toast.makeText(getActivity(), "Log out", Toast.LENGTH_SHORT).show();
             }
         });
