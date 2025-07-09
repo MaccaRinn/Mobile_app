@@ -29,6 +29,8 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.Objects;
+
 public class LoginActivity extends AppCompatActivity {
 
     public SessionManager sessionManager;
@@ -64,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         forgotPassword = findViewById(R.id.forgot_password);
 
 
-        // Email & password login
+        //email login
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,26 +80,34 @@ public class LoginActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(Task<AuthResult> task) {
                                         if (task.isSuccessful()) {
-                                            Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                                            SessionManager.isLogged = true;
-                                            finish();
+                                            // Check if email is verified
+                                            if (Objects.requireNonNull(auth.getCurrentUser()).isEmailVerified()) {
+                                                Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                                SessionManager.isLogged = true;
+                                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                                finish();
+                                            } else {
+                                                Toast.makeText(LoginActivity.this, "Please verify your email before logging in.", Toast.LENGTH_LONG).show();
+                                                FirebaseAuth.getInstance().signOut();
+                                                SessionManager.isLogged = false;
+                                            }
                                         } else {
-                                            Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(LoginActivity.this, "Login Failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                                             SessionManager.isLogged = false;
                                         }
                                     }
                                 });
                     } else {
-                        loginPassword.setError("Empty fields are not allowed");
+                        loginPassword.setError("Password cannot be empty");
                     }
                 } else if (email.isEmpty()) {
-                    loginEmail.setError("Empty fields are not allowed");
+                    loginEmail.setError("Email cannot be empty");
                 } else {
-                    loginEmail.setError("Please enter correct email");
+                    loginEmail.setError("Please enter a valid email address");
                 }
             }
         });
+
 
         // Redirect to Sign Up screen
         signupRedirectText.setOnClickListener(new View.OnClickListener() {

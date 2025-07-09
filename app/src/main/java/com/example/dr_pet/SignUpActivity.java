@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 public class SignUpActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
@@ -52,11 +54,24 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(SignUpActivity.this, "SignUp Successful", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                                auth.getCurrentUser().sendEmailVerification()
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> verifyTask) {
+                                                if (verifyTask.isSuccessful()) {
+                                                    Toast.makeText(SignUpActivity.this, "Sign up successful. Please verify your email.", Toast.LENGTH_LONG).show();
+                                                    auth.signOut();
+                                                    startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                                                    finish();
+                                                } else {
+                                                    Toast.makeText(SignUpActivity.this, "Failed to send verification email.", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
                             } else {
-                                Toast.makeText(SignUpActivity.this, "SignUp Failed" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUpActivity.this, "SignUp Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
+
                         }
                     });
                 }

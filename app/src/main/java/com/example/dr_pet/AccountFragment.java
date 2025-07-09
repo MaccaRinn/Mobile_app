@@ -97,6 +97,7 @@ public class AccountFragment extends Fragment {
         EditText edtAdr = view.findViewById(R.id.edtAdr);
         TextView txtEmail = view.findViewById(R.id.txtEmail);
 
+        txtEmail.setText(auth.getCurrentUser().getEmail());
 
         String uid = FirebaseAuth.getInstance().getUid();
         if (uid != null){
@@ -107,7 +108,6 @@ public class AccountFragment extends Fragment {
                         if(dataSnapshot.exists()){
                             Account account = dataSnapshot.getValue(Account.class);
                             if (account != null){
-                                txtEmail.setText(auth.getCurrentUser().getEmail());
                                 edtAdr.setText(account.getAddress());
                                 edtFName.setText(account.getFirstName());
                                 edtLName.setText(account.getLastName());
@@ -126,7 +126,6 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 auth.signOut();
-                mGoogleSignInClient.signOut();
                 SessionManager.isLogged = false;
                 startActivity(new Intent(getActivity(),HomeActivity.class));
                 Toast.makeText(getActivity(), "Log out", Toast.LENGTH_SHORT).show();
