@@ -35,8 +35,6 @@ public class HomeActivity extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottom_menu);
 
-        bottomNavigationView.setSelectedItemId(R.id.nav_home);
-
 
         Map<Integer, Fragment> fragmentMap = new HashMap<>();
         fragmentMap.put(R.id.nav_home, new HomeFragment());
