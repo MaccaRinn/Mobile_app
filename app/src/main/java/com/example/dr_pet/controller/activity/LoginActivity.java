@@ -27,6 +27,8 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.Objects;
 
+import com.example.dr_pet.AuthManager;
+
 public class LoginActivity extends AppCompatActivity {
 
     public SessionManager sessionManager;
@@ -76,20 +78,19 @@ public class LoginActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(Task<AuthResult> task) {
                                         if (task.isSuccessful()) {
-                                            // Check if email is verified
                                             if (Objects.requireNonNull(auth.getCurrentUser()).isEmailVerified()) {
                                                 Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                                SessionManager.isLogged = true;
+                                                AuthManager.setLoggedIn(LoginActivity.this, true);
                                                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                                 finish();
                                             } else {
                                                 Toast.makeText(LoginActivity.this, "Please verify your email before logging in.", Toast.LENGTH_LONG).show();
                                                 FirebaseAuth.getInstance().signOut();
-                                                SessionManager.isLogged = false;
+                                                AuthManager.setLoggedIn(LoginActivity.this, false);
                                             }
                                         } else {
                                             Toast.makeText(LoginActivity.this, "Login Failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
-                                            SessionManager.isLogged = false;
+                                            AuthManager.setLoggedIn(LoginActivity.this, false);
                                         }
                                     }
                                 });

@@ -12,6 +12,7 @@ import com.example.dr_pet.controller.Fragment.AccountFragment;
 import com.example.dr_pet.controller.Fragment.HomeFragment;
 import com.example.dr_pet.controller.Fragment.PetFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.dr_pet.AuthManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,7 +46,7 @@ public class HomeActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
 
-            if (itemId == R.id.nav_profile && !sessionManager.isLogged) {
+            if (itemId == R.id.nav_profile && !AuthManager.isLoggedIn(this)) {
                 Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                 startActivity(intent);
                 return false;
