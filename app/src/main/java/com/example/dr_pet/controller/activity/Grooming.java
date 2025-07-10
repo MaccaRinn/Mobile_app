@@ -19,6 +19,7 @@ public class Grooming extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
         // Kiểm tra đăng nhập trước khi cho vào dịch vụ grooming
         if (!AuthManager.isLoggedIn(this)) {
             Intent intent = new Intent(this, LoginActivity.class);

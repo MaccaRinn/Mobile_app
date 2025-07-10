@@ -8,9 +8,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import android.os.Bundle;
+import android.widget.DatePicker;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import android.app.DatePickerDialog;
+import android.widget.EditText;
+import java.util.Calendar;
 
 public class ServiceOrderActivity extends AppCompatActivity {
 
@@ -28,12 +34,11 @@ public class ServiceOrderActivity extends AppCompatActivity {
         TextView txtDetail = findViewById(R.id.textView10);
         String detail = getIntent().getStringExtra("service_detail");
         txtDetail.setText(detail);
-        
+
         ImageView imgService = findViewById(R.id.imgServiceOrder);
         TextView txtName = findViewById(R.id.txtServiceOrderName);
         TextView txtPrice = findViewById(R.id.txtServiceOrderPrice);
 
-        // Nhận dữ liệu từ Intent
         String name = getIntent().getStringExtra("service_name");
         int price = getIntent().getIntExtra("service_price", 0);
         int imgRes = getIntent().getIntExtra("service_img", 0);
@@ -41,5 +46,31 @@ public class ServiceOrderActivity extends AppCompatActivity {
         txtName.setText(name);
         txtPrice.setText(price + " VNĐ");
         imgService.setImageResource(imgRes);
+
+        // Lấy ngày đặt từ DatePicker khi xác nhận
+        EditText edtOrderDate = findViewById(R.id.edtOrderDate);
+        edtOrderDate.setOnClickListener(v -> {
+            Calendar calendar = Calendar.getInstance();
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(
+                    this,
+                    (view, selectedYear, selectedMonth, selectedDay) -> {
+                        String date = String.format("%02d/%02d/%04d", selectedDay, selectedMonth + 1, selectedYear);
+                        edtOrderDate.setText(date);
+                    },
+                    year, month, day
+            );
+            datePickerDialog.show();
+        });
+
+        // Khi xác nhận đặt dịch vụ, lấy ngày đã chọn:
+        Button btnConfirm = findViewById(R.id.btnConfirmOrder);
+        btnConfirm.setOnClickListener(v -> {
+            String date = edtOrderDate.getText().toString();
+            // ... xử lý tiếp ...
+        });
     }
     }
