@@ -3,7 +3,6 @@ package com.example.dr_pet.controller.activity;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.dr_pet.Model.SessionManager;
 import com.example.dr_pet.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -30,8 +29,6 @@ import java.util.Objects;
 import com.example.dr_pet.AuthManager;
 
 public class LoginActivity extends AppCompatActivity {
-
-    public SessionManager sessionManager;
 
     private static final int RC_SIGN_IN = 9001;  // Request code for Google sign-in
 

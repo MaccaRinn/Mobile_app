@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dr_pet.Model.Account;
-import com.example.dr_pet.Model.SessionManager;
 import com.example.dr_pet.R;
 import com.example.dr_pet.controller.activity.HomeActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -45,7 +44,6 @@ public class AccountFragment extends Fragment {
 
     GoogleSignInClient mGoogleSignInClient;
 
-    public SessionManager sessionManager;
 
     public AccountFragment() {
         // Required empty public constructor
