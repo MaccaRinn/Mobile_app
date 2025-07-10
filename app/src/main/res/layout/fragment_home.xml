@@ -89,11 +89,12 @@
                 android:id="@+id/btn_grooming"
                 android:layout_width="63dp"
                 android:layout_height="63dp"
+                android:layout_marginStart="4dp"
                 android:background="@drawable/circle_background"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/grooming"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:srcCompat="@drawable/grooming" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -109,12 +110,12 @@
                 android:id="@+id/btn_healthcare"
                 android:layout_width="63dp"
                 android:layout_height="63dp"
+                android:layout_marginStart="36dp"
                 android:background="@drawable/circle_background"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/care"
-                app:layout_constraintTop_toTopOf="@id/btn_grooming"
                 app:layout_constraintStart_toEndOf="@id/btn_grooming"
-                android:layout_marginStart="16dp"/>
+                app:layout_constraintTop_toTopOf="@id/btn_grooming"
+                app:srcCompat="@drawable/care" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -130,12 +131,12 @@
                 android:id="@+id/btn_boarding"
                 android:layout_width="63dp"
                 android:layout_height="63dp"
+                android:layout_marginStart="36dp"
                 android:background="@drawable/circle_background"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/grooming"
-                app:layout_constraintTop_toTopOf="@id/btn_grooming"
                 app:layout_constraintStart_toEndOf="@id/btn_healthcare"
-                android:layout_marginStart="16dp"/>
+                app:layout_constraintTop_toTopOf="@id/btn_grooming"
+                app:srcCompat="@drawable/grooming" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -151,12 +152,12 @@
                 android:id="@+id/btn_service_shop"
                 android:layout_width="63dp"
                 android:layout_height="63dp"
+                android:layout_marginStart="36dp"
                 android:background="@drawable/circle_background"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/care"
-                app:layout_constraintTop_toTopOf="@id/btn_grooming"
                 app:layout_constraintStart_toEndOf="@id/btn_boarding"
-                android:layout_marginStart="16dp"/>
+                app:layout_constraintTop_toTopOf="@id/btn_grooming"
+                app:srcCompat="@drawable/care" />
 
             <TextView
                 android:layout_width="wrap_content"

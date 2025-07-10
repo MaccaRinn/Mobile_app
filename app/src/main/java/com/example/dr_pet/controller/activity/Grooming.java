@@ -1,6 +1,8 @@
 package com.example.dr_pet.controller.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,9 +10,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import android.content.Intent;
-import android.widget.ImageButton;
-
+import com.example.dr_pet.AuthManager;
 import com.example.dr_pet.R;
 import com.example.dr_pet.ServiceOrderActivity;
 
@@ -19,6 +19,13 @@ public class Grooming extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Kiểm tra đăng nhập trước khi cho vào dịch vụ grooming
+        if (!AuthManager.isLoggedIn(this)) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_grooming);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
