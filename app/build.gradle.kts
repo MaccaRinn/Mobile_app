@@ -56,12 +56,12 @@ dependencies {
 
 
     // Firebase Authentication SDK
-    implementation("com.google.firebase:firebase-auth:21.0.6")  // Cập nhật phiên bản nếu cần
+    implementation("com.google.firebase:firebase-auth:21.0.6")
 
     implementation ("com.google.firebase:firebase-storage:20.3.0")
 
     // Google Sign-In SDK
-    implementation("com.google.android.gms:play-services-auth:20.0.1")  // Cập nhật phiên bản nếu cần
+    implementation("com.google.android.gms:play-services-auth:20.0.1")
 
 
 
