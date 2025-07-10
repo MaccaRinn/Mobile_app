@@ -110,6 +110,7 @@ public class AccountFragment extends Fragment {
                         if(dataSnapshot.exists()){
                             Account account = dataSnapshot.getValue(Account.class);
                             if (account != null){
+                                txtEmail.setText(auth.getCurrentUser().getEmail());
                                 edtAdr.setText(account.getAddress());
                                 edtFName.setText(account.getFirstName());
                                 edtLName.setText(account.getLastName());
