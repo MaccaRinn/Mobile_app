@@ -22,6 +22,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.example.dr_pet.AuthManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -127,7 +128,7 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 auth.signOut();
-                SessionManager.isLogged = false;
+                AuthManager.setLoggedIn(getActivity(), false);
                 startActivity(new Intent(getActivity(), HomeActivity.class));
                 Toast.makeText(getActivity(), "Log out", Toast.LENGTH_SHORT).show();
             }
