@@ -40,10 +40,16 @@
             android:textColor="#FF5722"
             android:layout_marginBottom="24dp"/>
 
+        <Spinner
+            android:id="@+id/spinnerPet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp" />
+
         <TextView
             android:id="@+id/textView10"
             android:layout_width="336dp"
-            android:layout_height="372dp"
+            android:layout_height="308dp"
             android:text="Chi tiết dịch vụ" />
 
         <Button

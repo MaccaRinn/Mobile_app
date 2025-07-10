@@ -24,6 +24,11 @@ public class ServiceOrderActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        TextView txtDetail = findViewById(R.id.textView10);
+        String detail = getIntent().getStringExtra("service_detail");
+        txtDetail.setText(detail);
+        
         ImageView imgService = findViewById(R.id.imgServiceOrder);
         TextView txtName = findViewById(R.id.txtServiceOrderName);
         TextView txtPrice = findViewById(R.id.txtServiceOrderPrice);

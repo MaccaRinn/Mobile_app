@@ -26,22 +26,43 @@ public class Grooming extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
         ImageButton btnDetail1 = findViewById(R.id.btnDetail1);
         ImageButton btnDetail2 = findViewById(R.id.btnDetail2);
         ImageButton btnDetail3 = findViewById(R.id.btnDetail3);
         ImageButton btnDetail4 = findViewById(R.id.btnDetail4);
 
-        btnDetail1.setOnClickListener(v -> openServiceOrder("Cắt tỉa lông cơ bản", 100000, R.drawable.bong));
-        btnDetail2.setOnClickListener(v -> openServiceOrder("Tắm gội", 80000, R.drawable.bi));
-        btnDetail3.setOnClickListener(v -> openServiceOrder("Cạo lông vệ sinh", 50000, R.drawable.care));
-        btnDetail4.setOnClickListener(v -> openServiceOrder("Chăm sóc móng", 60000, R.drawable.bgpet));
+        btnDetail1.setOnClickListener(v -> openServiceOrder(
+                "Cắt tỉa lông cơ bản", 100000, R.drawable.bong, "Cắt tỉa lông, tạo kiểu cơ bản cho thú cưng."
+        ));
+
+        btnDetail2.setOnClickListener(v ->
+                openServiceOrder("Chăm sóc móng", 80000, R.drawable.bi, "Chăm sóc móng cho thú cưng.")
+        );
+
+
+        btnDetail3.setOnClickListener(v ->
+                openServiceOrder("Cạo lông", 50000, R.drawable.care, "Cạo lông.")
+        );
+
+
+        btnDetail4.setOnClickListener(v ->
+                openServiceOrder("Tắm gội", 60000, R.drawable.bgpet, "Tắm gội sạch sẽ, khử mùi và làm mượt lông.")
+        );
     }
 
-    private void openServiceOrder(String name, int price, int imgRes) {
+
+
+    private void openServiceOrder(String name, int price, int imgRes, String detail) {
         Intent intent = new Intent(this, ServiceOrderActivity.class);
         intent.putExtra("service_name", name);
         intent.putExtra("service_price", price);
         intent.putExtra("service_img", imgRes);
+        intent.putExtra("service_detail", detail);
         startActivity(intent);
     }
-    }
+
+
+
+}
