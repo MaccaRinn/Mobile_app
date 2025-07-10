@@ -11,6 +11,9 @@ public class Pet {
     private LocalDate brithDate;
     private String note;
 
+    private String desc;
+    private int imageResId;
+
     public String getSpecies() {
         return species;
     }
@@ -78,5 +81,7 @@ public class Pet {
         this.gender = gender;
         this.brithDate = brithDate;
         this.note = note;
+        this.desc = desc;
+        this.imageResId = imageResId;
     }
 }

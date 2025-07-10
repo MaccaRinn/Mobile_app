@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.dr_pet.Model.SessionManager;
 import com.example.dr_pet.R;
 import com.example.dr_pet.controller.Fragment.AccountFragment;
 import com.example.dr_pet.controller.Fragment.HomeFragment;
@@ -19,7 +18,6 @@ import java.util.Map;
 
 public class HomeActivity extends AppCompatActivity {
 
-    public SessionManager sessionManager;
 
     BottomNavigationView bottomNavigationView;
 

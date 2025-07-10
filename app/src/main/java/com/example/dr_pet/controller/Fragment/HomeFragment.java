@@ -107,6 +107,15 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        ImageButton btnBoarding = view.findViewById(R.id.btn_boarding);
+        btnBoarding.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), com.example.dr_pet.BoardingActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
         //return inflater.inflate(R.layout.fragment_home, container, false);
     }
