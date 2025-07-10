@@ -17,7 +17,7 @@ public class AddPetActivity extends AppCompatActivity {
 
     Button btn_growth,btn_vaccine, btn_grooming;
 
-    LinearLayout layoutGrowth, layoutVaccine,layoutGrooming;
+    LinearLayout sectionGrowth,sectionVaccine,sectionGrooming;
 
 
     @Override
@@ -28,38 +28,30 @@ public class AddPetActivity extends AppCompatActivity {
         btn_growth = findViewById(R.id.btn_growth);
         btn_vaccine = findViewById(R.id.btn_vaccine);
         btn_grooming = findViewById(R.id.btn_grooming);
+        sectionGrooming = findViewById(R.id.section_grooming);
+        sectionGrowth = findViewById(R.id.section_growth);
+        sectionVaccine = findViewById(R.id.section_vaccine);
+        setupToggle(btn_growth, sectionGrowth);
+        setupToggle(btn_vaccine, sectionVaccine);
+        setupToggle(btn_grooming, sectionGrooming);
+
+    }
 
 
-
-        btn_growth.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toggleVisibility(layoutGrowth);
-            }
-        });
-
-        btn_vaccine.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toggleVisibility(layoutVaccine);
-            }
-        });
-
-        btn_grooming.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toggleVisibility(layoutGrooming);
+    private void setupToggle(Button button, LinearLayout section) {
+        button.setOnClickListener(v -> {
+            if (section.getVisibility() == View.GONE) {
+                section.setVisibility(View.VISIBLE);
+                section.setAlpha(0f);
+                section.animate().alpha(1f).setDuration(300).start();
+            } else {
+                section.animate().alpha(0f).setDuration(300).withEndAction(() -> section.setVisibility(View.GONE)).start();
             }
         });
     }
 
 
-    private void toggleVisibility(LinearLayout layout) {
-        if (layout.getVisibility() == View.GONE) {
-            layout.setVisibility(View.VISIBLE);
-        } else {
-            layout.setVisibility(View.GONE);
-        }
-    }
+
+
 
 }
