@@ -30,12 +30,12 @@
             android:textColor="#222" />
 
         <TextView
-            android:id="@+id/txtServiceDesc"
+            android:id="@+id/txtServicePrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
             android:textSize="13sp"
-            android:textColor="#666"
+            android:textColor="#F9B233"
             android:layout_marginTop="4dp"/>
     </LinearLayout>
 

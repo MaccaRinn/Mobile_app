@@ -72,5 +72,10 @@ public class ServiceOrderActivity extends AppCompatActivity {
             String date = edtOrderDate.getText().toString();
             // ... xử lý tiếp ...
         });
+        android.widget.Button btnCancel = findViewById(R.id.btn_cancel);
+        btnCancel.setOnClickListener(v -> {
+            android.widget.Toast.makeText(this, "Đã hủy xác nhận dịch vụ", android.widget.Toast.LENGTH_SHORT).show();
+            finish();
+        });
     }
-    }
+}

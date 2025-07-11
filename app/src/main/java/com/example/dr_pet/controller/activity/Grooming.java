@@ -47,13 +47,14 @@ public class Grooming extends AppCompatActivity {
 
         // Khởi tạo danh sách dịch vụ mẫu
         serviceList = new ArrayList<>();
-        serviceList.add(new GroomingService("Cắt tỉa lông cơ bản", "Cắt tỉa lông, tạo kiểu cơ bản cho thú cưng.", R.drawable.bong));
-        serviceList.add(new GroomingService("Chăm sóc móng", "Chăm sóc móng cho thú cưng.", R.drawable.bi));
-        serviceList.add(new GroomingService("Cạo lông", "Cạo lông.", R.drawable.care));
-        serviceList.add(new GroomingService("Tắm gội", "Tắm gội sạch sẽ, khử mùi và làm mượt lông.", R.drawable.bgpet));
+        serviceList.add(new GroomingService("Cắt tỉa lông cơ bản", "Cắt tỉa lông, tạo kiểu cơ bản cho thú cưng.", R.drawable.bong, 50000));
+        serviceList.add(new GroomingService("Chăm sóc móng", "Chăm sóc móng cho thú cưng.", R.drawable.bi, 30000));
+        serviceList.add(new GroomingService("Cạo lông", "Cạo lông.", R.drawable.care, 40000));
+        serviceList.add(new GroomingService("Tắm gội", "Tắm gội sạch sẽ, khử mùi và làm mượt lông.", R.drawable.bgpet, 60000));
 
         adapter = new GroomingAdapter(serviceList, service -> openServiceOrder(service));
         recyclerView.setAdapter(adapter);
+        findViewById(R.id.btn_grooming_back1).setOnClickListener(v -> onBackPressed());
     }
 
     private void openServiceOrder(GroomingService service) {
@@ -61,6 +62,9 @@ public class Grooming extends AppCompatActivity {
         intent.putExtra("service_name", service.getName());
         intent.putExtra("service_desc", service.getDesc());
         intent.putExtra("service_img", service.getImageResId());
+        intent.putExtra("service_price", service.getPrice());
         startActivity(intent);
     }
+
+
 }

@@ -9,16 +9,14 @@
     android:background="@drawable/mainbackground">
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="24dp"
-        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
-
 
 
         <ImageView
@@ -67,8 +65,8 @@
 
         <TextView
             android:id="@+id/textView10"
-            android:layout_width="374dp"
-            android:layout_height="249dp"
+            android:layout_width="353dp"
+            android:layout_height="220dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="16dp"
             android:background="@drawable/mainbackground"
@@ -81,11 +79,29 @@
             android:textColor="#333333"
             android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/btnConfirmOrder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Xác nhận đặt dịch vụ" />
+        <LinearLayout
+            android:layout_width="232dp"
+            android:layout_height="78dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="103dp"
+                android:layout_height="47dp"
+                android:layout_marginRight="16dp"
+                android:backgroundTint="#FF5252"
+                android:text="Hủy"
+                android:textColor="#FFF" />
+
+            <Button
+                android:id="@+id/btnConfirmOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#48C914"
+                android:text="Xác nhận" />
+
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

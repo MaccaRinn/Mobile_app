@@ -38,7 +38,10 @@ public class BoardingActivity extends AppCompatActivity {
         BoardingAdapter adapter = new BoardingAdapter(petList, pet -> {
             // Xử lý khi bấm Book now
         });
+        findViewById(R.id.btn_grooming_back).setOnClickListener(v -> onBackPressed());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
     }
 }
