@@ -1,26 +1,22 @@
 package com.example.dr_pet.Model;
 
-import java.time.LocalDate;
+import java.io.Serializable;
 
-public class Pet {
+public class Pet implements Serializable {
+
+    private  String petId;
+
     private  String name;
     private  String species;
     private  float  weight;
     private  int petUrl;
     private  String gender;
-    private LocalDate brithDate;
+    private String brithDate;
     private String note;
 
-    private String desc;
-    private int imageResId;
 
-    public String getSpecies() {
-        return species;
-    }
 
-    public void setSpecies(String species) {
-        this.species = species;
-    }
+
 
     public String getName() {
         return name;
@@ -28,6 +24,14 @@ public class Pet {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSpecies() {
+        return species;
+    }
+
+    public void setSpecies(String species) {
+        this.species = species;
     }
 
     public float getWeight() {
@@ -38,14 +42,6 @@ public class Pet {
         this.weight = weight;
     }
 
-    public int getPetUrl() {
-        return petUrl;
-    }
-
-    public void setPetUrl(int petUrl) {
-        this.petUrl = petUrl;
-    }
-
     public String getGender() {
         return gender;
     }
@@ -54,11 +50,19 @@ public class Pet {
         this.gender = gender;
     }
 
-    public LocalDate getBrithDate() {
+    public int getPetUrl() {
+        return petUrl;
+    }
+
+    public void setPetUrl(int petUrl) {
+        this.petUrl = petUrl;
+    }
+
+    public String getBrithDate() {
         return brithDate;
     }
 
-    public void setBrithDate() {
+    public void setBrithDate(String brithDate) {
         this.brithDate = brithDate;
     }
 
@@ -70,18 +74,29 @@ public class Pet {
         this.note = note;
     }
 
+
+
+
     public Pet() {
     }
 
-    public Pet(String name, String species, int petUrl, float weight, String gender, LocalDate brithDate, String note) {
+    public Pet(String name, String species, float weight, int petUrl, String gender, String brithDate, String note) {
         this.name = name;
         this.species = species;
-        this.petUrl = petUrl;
         this.weight = weight;
+        this.petUrl = petUrl;
         this.gender = gender;
         this.brithDate = brithDate;
         this.note = note;
-        this.desc = desc;
-        this.imageResId = imageResId;
+
+    }
+
+    public void setPetId(String petId){
+        this.petId = petId;
+    }
+
+
+    public String getPetId() {
+        return  petId;
     }
 }

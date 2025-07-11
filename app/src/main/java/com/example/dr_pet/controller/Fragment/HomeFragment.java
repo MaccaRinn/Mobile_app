@@ -2,7 +2,9 @@ package com.example.dr_pet.controller.Fragment;
 
 import android.os.Bundle;
 
+import androidx.exifinterface.media.ExifInterface;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.viewmodel.CreationExtras;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import android.content.Intent;
 import android.widget.ImageButton;
 
+import com.example.dr_pet.AuthManager;
 import com.example.dr_pet.Model.Pet;
 import com.example.dr_pet.R;
 import com.example.dr_pet.controller.activity.Grooming;
@@ -84,20 +87,12 @@ public class HomeFragment extends Fragment {
         petReView.setLayoutManager(new GridLayoutManager(getContext(),2));
 
 
-        petList = new ArrayList<>();
 
-        Pet newPet = new Pet();
-        newPet.setName("Bong");
-        newPet.setPetUrl(R.drawable.bong);
-        newPet.setGender("Female");
-        newPet.setSpecies("Cat");
-        newPet.setBrithDate();
-
-        petList.add(newPet);
+            petList = new ArrayList<>();
+            petAdapter = new PetAdapter(petList, getContext());
+            petReView.setAdapter(petAdapter);
 
 
-        petAdapter = new PetAdapter(petList, getContext());
-        petReView.setAdapter(petAdapter);
 
         ImageButton btnGrooming = view.findViewById(R.id.btn_grooming);
         btnGrooming.setOnClickListener(new View.OnClickListener() {

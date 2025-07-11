@@ -2,6 +2,7 @@ package com.example.dr_pet.controller.Fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,10 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.dr_pet.Model.Pet;
 import com.example.dr_pet.R;
 import com.example.dr_pet.controller.adapter.PetAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,14 +88,6 @@ public class PetFragment extends Fragment {
 
         petList = new ArrayList<>();
 
-        Pet newPet = new Pet();
-        newPet.setName("Bong");
-        newPet.setPetUrl(R.drawable.bong);
-        newPet.setGender("Female");
-        newPet.setSpecies("Cat");
-        newPet.setBrithDate();
-
-
 //        petList.add(newPet);
 
         petAdapter = new PetAdapter(petList, getContext());
@@ -95,4 +95,6 @@ public class PetFragment extends Fragment {
 
         return view;
     }
+
+
 }

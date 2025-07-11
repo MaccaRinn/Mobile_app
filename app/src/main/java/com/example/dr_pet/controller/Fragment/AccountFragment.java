@@ -42,7 +42,6 @@ public class AccountFragment extends Fragment {
     //declare firebase and gg
     FirebaseAuth auth;
 
-    GoogleSignInClient mGoogleSignInClient;
 
 
     public AccountFragment() {
@@ -72,11 +71,7 @@ public class AccountFragment extends Fragment {
         super.onCreate(savedInstanceState);
         // compulsory to use firebase or gg authentication
         auth = FirebaseAuth.getInstance();
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))  // Use the client ID from Firebase
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
+
 
 
 

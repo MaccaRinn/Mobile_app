@@ -62,7 +62,7 @@ public class BoardingAdapter extends RecyclerView.Adapter<BoardingAdapter.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imgPet = itemView.findViewById(R.id.imgPet);
-            txtPetName = itemView.findViewById(R.id.txtPetName);
+            txtPetName = itemView.findViewById(R.id.txtPetname);
             txtPetDesc = itemView.findViewById(R.id.txtPetDesc);
             btnBookNow = itemView.findViewById(R.id.btnBookNow);
         }

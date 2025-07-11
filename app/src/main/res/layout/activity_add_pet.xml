@@ -33,7 +33,7 @@
 
     <!-- Pet Name -->
     <EditText
-        android:id="@+id/edtName"
+        android:id="@+id/edtPName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -54,7 +54,7 @@
         android:backgroundTint="#FDD991"
         android:text="Detail"
         android:textColor="#5C3B0C"
-        app:layout_constraintTop_toBottomOf="@id/edtName"
+        app:layout_constraintTop_toBottomOf="@id/edtPName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -79,15 +79,11 @@
             android:textColor="#5C3B0C"
             android:textSize="14sp"
             android:paddingTop="8dp" />
-        <EditText
-            android:id="@+id/edt_species"
+        <Spinner
+            android:id="@+id/spinner_species"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter species"
-            android:inputType="text"
-            android:background="@android:color/transparent"
-            android:textColor="#5C3B0C"
-            android:textSize="14sp" />
+            android:spinnerMode="dropdown" />
 
         <!-- Weight -->
         <TextView
