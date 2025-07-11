@@ -8,11 +8,10 @@
     android:gravity="center_vertical">
 
     <ImageView
-        android:id="@+id/imgPet"
+        android:id="@+id/imgService"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:scaleType="centerCrop"
-        />
+        android:scaleType="centerCrop"/>
 
     <LinearLayout
         android:orientation="vertical"
@@ -22,7 +21,7 @@
         android:layout_marginStart="12dp">
 
         <TextView
-            android:id="@+id/txtPetName"
+            android:id="@+id/txtServiceName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
@@ -30,21 +29,21 @@
             android:textSize="16sp"
             android:textColor="#222" />
 
-            <TextView
-                android:id="@+id/txtPetDesc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="13sp"
-                android:textColor="#666"
-                android:layout_marginStart="4dp"/>
+        <TextView
+            android:id="@+id/txtServiceDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="13sp"
+            android:textColor="#666"
+            android:layout_marginTop="4dp"/>
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnBookNow"
+        android:id="@+id/btnOrder"
         android:layout_width="100dp"
         android:layout_height="40dp"
-        android:text="Book"
+        android:text="Order"
         android:textStyle="bold"
         android:textColor="#fff"
         android:backgroundTint="#F9B233"
