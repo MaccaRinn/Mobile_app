@@ -1,9 +1,5 @@
 package com.example.dr_pet.controller.adapter;
 
-import static android.app.PendingIntent.getActivity;
-import static androidx.core.content.ContentProviderCompat.requireContext;
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -14,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.exifinterface.media.ExifInterface;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dr_pet.AuthManager;
