@@ -55,7 +55,7 @@ public class GroomingAdapter extends RecyclerView.Adapter<GroomingAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         GroomingService service = serviceList.get(position);
         holder.txtServiceName.setText(service.getName());
-        holder.txtServiceDesc.setText(service.getDesc());
+        holder.txtServicePrice.setText(service.getPrice() + " VNĐ");
         holder.imgService.setImageResource(service.getImageResId());
         holder.btnOrder.setOnClickListener(v -> listener.onOrderClick(service));
         // Edit and Delete buttons (optional, add to item_grooming.xml if needed)
@@ -92,14 +92,14 @@ public class GroomingAdapter extends RecyclerView.Adapter<GroomingAdapter.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgService;
-        TextView txtServiceName, txtServiceDesc;
+        TextView txtServiceName, txtServicePrice;
         Button btnOrder;
         Button btnEdit, btnDelete; // Optional: add these buttons to item_grooming.xml if you want
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imgService = itemView.findViewById(R.id.imgService);
             txtServiceName = itemView.findViewById(R.id.txtServiceName);
-            txtServiceDesc = itemView.findViewById(R.id.txtServiceDesc);
+            txtServicePrice = itemView.findViewById(R.id.txtServicePrice);
             btnOrder = itemView.findViewById(R.id.btnOrder);
             // Optional: find edit/delete buttons if present
             //btnEdit = itemView.findViewById(R.id.btnEdit);
