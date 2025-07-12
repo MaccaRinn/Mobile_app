@@ -134,7 +134,6 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder> {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(context, "Failed to load pets", Toast.LENGTH_SHORT).show();
             }
         });
     }
