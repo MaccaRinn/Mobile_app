@@ -14,11 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dr_Pet"
         tools:targetApi="31">
+
         <activity
-            android:name=".BoardingActivity"
+            android:name=".controller.activity.BoardingActivity"
             android:exported="false" />
         <activity
-            android:name=".ServiceOrderActivity"
+            android:name=".controller.activity.ServiceOrderActivity"
             android:exported="false" />
         <activity
             android:name=".controller.activity.AddPetActivity"
