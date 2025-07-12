@@ -10,7 +10,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.dr_pet.Model.Pet;
+import com.example.dr_pet.Model.*;
 import com.example.dr_pet.R;
 import com.example.dr_pet.controller.adapter.BoardingAdapter;
 
@@ -30,19 +30,23 @@ public class BoardingActivity extends AppCompatActivity {
             return insets;
         });
 
+
         RecyclerView recyclerView = findViewById(R.id.recyclerBoarding);
-        List<Pet> petList = new ArrayList<>();
-        petList.add(new Pet("Mon Pet", "Cat", R.drawable.miu, 0, "", null, "Vân Lôi - Bình Yên - Thạch Thất - Hà Nội"));
-        petList.add(new Pet("Bông", "Cat", R.drawable.bong, 0, "", null, "bla bla bla"));
-        petList.add(new Pet("Bí", "Cat", R.drawable.bi, 0, "", null, "ble ble ble"));
-        petList.add(new Pet("Toán", "Cat", R.drawable.bong, 0, "", null, "blu blu blu"));
-        BoardingAdapter adapter = new BoardingAdapter(petList, pet -> {
-            // Xử lý khi bấm Book now
+        List<HotelOption> hotelOptions = new ArrayList<>();
+        hotelOptions.add(new HotelOption("Khách sạn A", "Phòng riêng, có camera giám sát 24/7, điều hòa, thức ăn cao cấp", 200000, R.drawable.miu));
+        hotelOptions.add(new HotelOption("Khách sạn B", "Phòng tập thể, giám sát định kỳ, thức ăn tiêu chuẩn", 120000, R.drawable.miu));
+        hotelOptions.add(new HotelOption("Khách sạn C", "Phòng cơ bản, không điều hòa, tự mang thức ăn", 80000, R.drawable.miu));
+        BoardingAdapter adapter = new BoardingAdapter(hotelOptions, option -> {
+            android.content.Intent intent = new android.content.Intent(BoardingActivity.this, ServiceOrderActivity.class);
+            intent.putExtra("service_type", "boarding");
+            intent.putExtra("service_name", option.getName());
+            intent.putExtra("service_desc", option.getDesc());
+            intent.putExtra("service_price", option.getPrice());
+            intent.putExtra("service_img", option.getImageResId());
+            startActivity(intent);
         });
         findViewById(R.id.btn_grooming_back).setOnClickListener(v -> onBackPressed());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
     }
 }
