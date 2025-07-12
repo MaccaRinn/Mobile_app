@@ -1,0 +1,6 @@
+<resources>
+    <string-array name="service_types">
+        <item>Grooming</item>
+        <item>Boarding</item>
+    </string-array>
+</resources>

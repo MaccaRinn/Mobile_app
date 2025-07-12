@@ -15,6 +15,7 @@ public class ServiceListActivity extends AppCompatActivity {
     private ServiceListAdapter adapter;
     private java.util.List<com.example.dr_pet.Model.GroomingOrder> serviceList = new java.util.ArrayList<>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,16 +35,28 @@ public class ServiceListActivity extends AppCompatActivity {
         android.widget.ImageButton btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(v -> finish());
 
-        loadServiceList();
+        android.widget.Spinner spinnerServiceType = findViewById(R.id.spinnerServiceType);
+        spinnerServiceType.setSelection(0); // default grooming
+        spinnerServiceType.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(android.widget.AdapterView<?> parent, android.view.View view, int position, long id) {
+                String type = parent.getItemAtPosition(position).toString().toLowerCase();
+                loadServiceList(type);
+            }
+            @Override
+            public void onNothingSelected(android.widget.AdapterView<?> parent) {}
+        });
+        // Load mặc định grooming
+        loadServiceList("grooming");
     }
 
-    private void loadServiceList() {
+    private void loadServiceList(String serviceType) {
         com.google.firebase.auth.FirebaseUser user = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) return;
         String userId = user.getUid();
         com.google.firebase.database.DatabaseReference ref = com.google.firebase.database.FirebaseDatabase.getInstance().getReference()
                 .child("Account").child(userId)
-                .child("service").child("grooming");
+                .child("service").child(serviceType);
         ref.addListenerForSingleValueEvent(new com.google.firebase.database.ValueEventListener() {
             @Override
             public void onDataChange(com.google.firebase.database.DataSnapshot snapshot) {
