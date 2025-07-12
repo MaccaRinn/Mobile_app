@@ -1,4 +1,4 @@
-package com.example.dr_pet;
+package com.example.dr_pet.controller.activity;
 
 import android.os.Bundle;
 
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dr_pet.Model.Pet;
+import com.example.dr_pet.R;
 import com.example.dr_pet.controller.adapter.BoardingAdapter;
 
 import java.util.ArrayList;

@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.dr_pet.AuthManager;
 import com.example.dr_pet.Model.GroomingService;
 import com.example.dr_pet.R;
-import com.example.dr_pet.ServiceOrderActivity;
 import com.example.dr_pet.controller.adapter.GroomingAdapter;
 
 import java.util.ArrayList;
