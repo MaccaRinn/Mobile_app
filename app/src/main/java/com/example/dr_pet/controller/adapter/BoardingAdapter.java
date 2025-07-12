@@ -1,3 +1,4 @@
+
 package com.example.dr_pet.controller.adapter;
 
 import android.view.LayoutInflater;
@@ -10,21 +11,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.dr_pet.Model.Pet;
 import com.example.dr_pet.R;
+import com.example.dr_pet.Model.HotelOption;
 
 import java.util.List;
 
 public class BoardingAdapter extends RecyclerView.Adapter<BoardingAdapter.ViewHolder> {
-    private List<Pet> petList;
+    private List<HotelOption> hotelOptions;
     private OnBookClickListener listener;
 
     public interface OnBookClickListener {
-        void onBookClick(Pet pet);
+        void onBookClick(HotelOption option);
     }
 
-    public BoardingAdapter(List<Pet> petList, OnBookClickListener listener) {
-        this.petList = petList;
+    public BoardingAdapter(List<HotelOption> hotelOptions, OnBookClickListener listener) {
+        this.hotelOptions = hotelOptions;
         this.listener = listener;
     }
 
@@ -38,32 +39,29 @@ public class BoardingAdapter extends RecyclerView.Adapter<BoardingAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Pet pet = petList.get(position);
-        holder.txtPetName.setText(pet.getName());
-        holder.txtPetDesc.setText(pet.getNote() != null ? pet.getNote() : "");
-        // Sử dụng petUrl nếu có, nếu không thì dùng ảnh mặc định
-        if (pet.getPetUrl() != 0) {
-            holder.imgPet.setImageResource(pet.getPetUrl());
-        } else {
-            holder.imgPet.setImageResource(R.drawable.miu); // Đảm bảo có ảnh này trong drawable
-        }
-        holder.btnBookNow.setOnClickListener(v -> listener.onBookClick(pet));
+        HotelOption option = hotelOptions.get(position);
+        holder.txtHotelName.setText(option.getName());
+        holder.txtHotelDesc.setText(option.getDesc());
+        holder.txtHotelPrice.setText("Giá: " + option.getPrice() + " VNĐ");
+        holder.imgHotel.setImageResource(option.getImageResId());
+        holder.btnBookNow.setOnClickListener(v -> listener.onBookClick(option));
     }
 
     @Override
     public int getItemCount() {
-        return petList != null ? petList.size() : 0;
+        return hotelOptions != null ? hotelOptions.size() : 0;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imgPet;
-        TextView txtPetName, txtPetDesc;
+        ImageView imgHotel;
+        TextView txtHotelName, txtHotelDesc, txtHotelPrice;
         Button btnBookNow;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgPet = itemView.findViewById(R.id.imgPet);
-            txtPetName = itemView.findViewById(R.id.txtPetname);
-            txtPetDesc = itemView.findViewById(R.id.txtPetDesc);
+            imgHotel = itemView.findViewById(R.id.imgHotel);
+            txtHotelName = itemView.findViewById(R.id.txtHotelName);
+            txtHotelDesc = itemView.findViewById(R.id.txtHotelDesc);
+            txtHotelPrice = itemView.findViewById(R.id.txtHotelPrice);
             btnBookNow = itemView.findViewById(R.id.btnBookNow);
         }
     }

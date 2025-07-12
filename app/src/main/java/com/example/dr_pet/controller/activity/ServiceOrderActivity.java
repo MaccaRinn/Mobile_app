@@ -157,19 +157,24 @@ public class ServiceOrderActivity extends AppCompatActivity {
                 return;
             }
             String userId = user.getUid();
-            DatabaseReference groomingRef = FirebaseDatabase.getInstance()
+            // Determine service type from Intent
+            String serviceType = getIntent().getStringExtra("service_type");
+            if (serviceType == null || (!serviceType.equals("grooming") && !serviceType.equals("boarding"))) {
+                serviceType = "grooming"; // Default to grooming if not specified
+            }
+            DatabaseReference serviceRef = FirebaseDatabase.getInstance()
                 .getReference("Account")
                 .child(userId)
                 .child("service")
-                .child("grooming");
+                .child(serviceType);
             // Tạo node mới cho mỗi đơn đặt dịch vụ
-            String serviceOrderId = groomingRef.push().getKey();
+            String serviceOrderId = serviceRef.push().getKey();
             if (serviceOrderId == null) {
                 Toast.makeText(ServiceOrderActivity.this, "Lỗi tạo đơn hàng!", Toast.LENGTH_LONG).show();
                 return;
             }
             GroomingOrder order = new GroomingOrder(serviceOrderId, serviceName, dateStr, noteText, selectedPet, priceStr);
-            groomingRef.child(serviceOrderId).setValue(order)
+            serviceRef.child(serviceOrderId).setValue(order)
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(ServiceOrderActivity.this, "Đặt dịch vụ thành công!", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(ServiceOrderActivity.this, HomeActivity.class);
