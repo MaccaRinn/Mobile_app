@@ -1,6 +1,7 @@
 package com.example.dr_pet.controller.activity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -30,6 +31,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.example.dr_pet.R;
 
 public class ServiceOrderActivity extends AppCompatActivity {
+    private TextView txtName;
+    private TextView txtPrice;
+    private Button btnConfirmOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +50,19 @@ public class ServiceOrderActivity extends AppCompatActivity {
 
 
             ImageView imgService = findViewById(R.id.imgServiceOrder);
-            TextView txtName = findViewById(R.id.txtServiceOrderName);
-            TextView txtPrice = findViewById(R.id.txtServiceOrderPrice);
+            txtName = findViewById(R.id.txtServiceOrderName);
+            txtPrice = findViewById(R.id.txtServiceOrderPrice);
 
             TextView txtPetChooser = findViewById(R.id.txtPetChooser);
+            EditText edtOrderNote = findViewById(R.id.edtOrderNote);
+            EditText edtOrderDate = findViewById(R.id.edtOrderDate);
+            btnConfirmOrder = findViewById(R.id.btnConfirmOrder);
+            android.util.Log.d("ServiceOrder", "txtName null? " + (txtName == null));
+            android.util.Log.d("ServiceOrder", "txtPrice null? " + (txtPrice == null));
+            android.util.Log.d("ServiceOrder", "edtOrderNote null? " + (edtOrderNote == null));
+            android.util.Log.d("ServiceOrder", "edtOrderDate null? " + (edtOrderDate == null));
+            android.util.Log.d("ServiceOrder", "txtPetChooser null? " + (txtPetChooser == null));
+            android.util.Log.d("ServiceOrder", "btnConfirmOrder null? " + (btnConfirmOrder == null));
 
             final ArrayList<String> petNames = new ArrayList<>();
             final boolean[] isPetLoaded = {false};
@@ -104,21 +117,90 @@ public class ServiceOrderActivity extends AppCompatActivity {
 
 
 
-        TextView txtDetail = findViewById(R.id.textView10);
-        String detail = getIntent().getStringExtra("service_detail");
-        txtDetail.setText(detail);
+        EditText edtOrderNote = findViewById(R.id.edtOrderNote);
+        // Nếu muốn truyền ghi chú từ intent, có thể lấy ở đây
+        String note = getIntent().getStringExtra("service_note");
+        if (note != null) edtOrderNote.setText(note);
 
-        ImageView imgService = findViewById(R.id.imgServiceOrder);
-        TextView txtName = findViewById(R.id.txtServiceOrderName);
-        TextView txtPrice = findViewById(R.id.txtServiceOrderPrice);
+        // ...existing code...
+        btnConfirmOrder.setOnClickListener(v -> {
+            EditText edtOrderDate = findViewById(R.id.edtOrderDate);
+            String dateStr = edtOrderDate != null ? edtOrderDate.getText().toString() : "";
+            String noteText = edtOrderNote.getText().toString();
+            TextView txtPetChooser = findViewById(R.id.txtPetChooser);
+            String selectedPet = txtPetChooser.getText().toString();
+            String serviceName = txtName.getText().toString();
+            String priceStr = txtPrice.getText().toString();
+            // Kiểm tra ngày hợp lệ
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
+            sdf.setLenient(false);
+            try {
+                java.util.Date selectedDate = sdf.parse(dateStr);
+                java.util.Calendar now = java.util.Calendar.getInstance();
+                now.set(java.util.Calendar.HOUR_OF_DAY, 0);
+                now.set(java.util.Calendar.MINUTE, 0);
+                now.set(java.util.Calendar.SECOND, 0);
+                now.set(java.util.Calendar.MILLISECOND, 0);
+                now.add(java.util.Calendar.DATE, 1); // Ngày hợp lệ phải sau hôm nay 1 ngày
+                if (selectedDate == null || !selectedDate.after(now.getTime())) {
+                    Toast.makeText(ServiceOrderActivity.this, "Yêu cầu chọn ngày hợp lệ", Toast.LENGTH_LONG).show();
+                    return;
+                }
+            } catch (Exception ex) {
+                Toast.makeText(ServiceOrderActivity.this, "Yêu cầu chọn ngày hợp lệ", Toast.LENGTH_LONG).show();
+                return;
+            }
+            // Lưu xuống Firebase
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            if (user == null) {
+                Toast.makeText(ServiceOrderActivity.this, "Chưa đăng nhập!", Toast.LENGTH_LONG).show();
+                return;
+            }
+            String userId = user.getUid();
+            DatabaseReference groomingRef = FirebaseDatabase.getInstance()
+                .getReference("Account")
+                .child(userId)
+                .child("service")
+                .child("grooming");
+            // Tạo node mới cho mỗi đơn đặt dịch vụ
+            String serviceOrderId = groomingRef.push().getKey();
+            if (serviceOrderId == null) {
+                Toast.makeText(ServiceOrderActivity.this, "Lỗi tạo đơn hàng!", Toast.LENGTH_LONG).show();
+                return;
+            }
+            GroomingOrder order = new GroomingOrder(serviceOrderId, serviceName, dateStr, noteText, selectedPet, priceStr);
+            groomingRef.child(serviceOrderId).setValue(order)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(ServiceOrderActivity.this, "Đặt dịch vụ thành công!", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(ServiceOrderActivity.this, HomeActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(ServiceOrderActivity.this, "Lỗi lưu đơn hàng: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                });
+        });
 
-        String name = getIntent().getStringExtra("service_name");
-        int price = getIntent().getIntExtra("service_price", 0);
-        int imgRes = getIntent().getIntExtra("service_img", 0);
-
-        txtName.setText(name);
-        txtPrice.setText(price + " VNĐ");
-        imgService.setImageResource(imgRes);
+        // GroomingOrder class
+        // Bạn có thể đặt class này ở ngoài hoặc trong file này
+        class GroomingOrder {
+            public String serviceOrderId;
+            public String name;
+            public String date;
+            public String note;
+            public String pet;
+            public String price;
+            public GroomingOrder() {}
+            public GroomingOrder(String serviceOrderId, String name, String date, String note, String pet, String price) {
+                this.serviceOrderId = serviceOrderId;
+                this.name = name;
+                this.date = date;
+                this.note = note;
+                this.pet = pet;
+                this.price = price;
+            }
+        }
 
         // Lấy ngày đặt từ DatePicker khi xác nhận
         EditText edtOrderDate = findViewById(R.id.edtOrderDate);
@@ -140,15 +222,30 @@ public class ServiceOrderActivity extends AppCompatActivity {
         });
 
         // Khi xác nhận đặt dịch vụ, lấy ngày đã chọn:
-        Button btnConfirm = findViewById(R.id.btnConfirmOrder);
-        btnConfirm.setOnClickListener(v -> {
-            String date = edtOrderDate.getText().toString();
-            // ... xử lý tiếp ...
-        });
+
         android.widget.Button btnCancel = findViewById(R.id.btn_cancel);
         btnCancel.setOnClickListener(v -> {
             android.widget.Toast.makeText(this, "Đã hủy xác nhận dịch vụ", android.widget.Toast.LENGTH_SHORT).show();
             finish();
         });
+    }
+
+    // Thêm class GroomingOrder để lưu đơn đặt dịch vụ grooming
+    class GroomingOrder {
+        public String serviceOrderId;
+        public String name;
+        public String date;
+        public String note;
+        public String pet;
+        public String price;
+        public GroomingOrder() {}
+        public GroomingOrder(String serviceOrderId, String name, String date, String note, String pet, String price) {
+            this.serviceOrderId = serviceOrderId;
+            this.name = name;
+            this.date = date;
+            this.note = note;
+            this.pet = pet;
+            this.price = price;
+        }
     }
 }
