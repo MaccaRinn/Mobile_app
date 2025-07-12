@@ -86,11 +86,9 @@ public class HomeFragment extends Fragment {
         petReView = view.findViewById(R.id.petRecylceViewHome);
         petReView.setLayoutManager(new GridLayoutManager(getContext(),2));
 
-
-
-            petList = new ArrayList<>();
-            petAdapter = new PetAdapter(petList, getContext());
-            petReView.setAdapter(petAdapter);
+        petList = new ArrayList<>();
+        petAdapter = new PetAdapter(petList, getContext());
+        petReView.setAdapter(petAdapter);
 
 
 

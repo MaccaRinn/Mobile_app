@@ -44,10 +44,12 @@ public class HomeActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
 
-            if (itemId == R.id.nav_profile && !AuthManager.isLoggedIn(this)) {
-                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-                startActivity(intent);
-                return false;
+            if (itemId == R.id.nav_profile) {
+                if (!AuthManager.isLoggedIn(this)) {
+                    Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    return false; // Ngăn fragment profile load khi chưa login
+                }
             }
 
             Fragment fragment = fragmentMap.get(itemId);

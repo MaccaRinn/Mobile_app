@@ -107,6 +107,10 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder> {
     }
 
     private void loadPetsFromFirebase() {
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            return;
+        }
+
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         DatabaseReference petRef = FirebaseDatabase.getInstance()
@@ -121,7 +125,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.ViewHolder> {
                 for (DataSnapshot petSnap : snapshot.getChildren()) {
                     Pet pet = petSnap.getValue(Pet.class);
                     if (pet != null) {
-                        pet.setPetId(petSnap.getKey()); // <-- gán ID cho Pet
+                        pet.setPetId(petSnap.getKey());
                         petList.add(pet);
                     }
                 }

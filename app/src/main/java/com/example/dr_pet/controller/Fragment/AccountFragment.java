@@ -16,10 +16,12 @@ import android.widget.Toast;
 import com.example.dr_pet.Model.Account;
 import com.example.dr_pet.R;
 import com.example.dr_pet.controller.activity.HomeActivity;
+import com.example.dr_pet.controller.activity.LoginActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.example.dr_pet.AuthManager;
 
@@ -92,7 +94,12 @@ public class AccountFragment extends Fragment {
         EditText edtAdr = view.findViewById(R.id.edtAdr);
         TextView txtEmail = view.findViewById(R.id.txtEmail);
 
-        txtEmail.setText(auth.getCurrentUser().getEmail());
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            String email = currentUser.getEmail();
+        } else {
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+        }
 
         String uid = FirebaseAuth.getInstance().getUid();
         if (uid != null){
