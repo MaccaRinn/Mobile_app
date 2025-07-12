@@ -2,9 +2,7 @@ package com.example.dr_pet.controller.Fragment;
 
 import android.os.Bundle;
 
-import androidx.exifinterface.media.ExifInterface;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.viewmodel.CreationExtras;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,9 +13,9 @@ import android.view.ViewGroup;
 import android.content.Intent;
 import android.widget.ImageButton;
 
-import com.example.dr_pet.AuthManager;
 import com.example.dr_pet.Model.Pet;
 import com.example.dr_pet.R;
+import com.example.dr_pet.controller.activity.BoardingActivity;
 import com.example.dr_pet.controller.activity.Grooming;
 import com.example.dr_pet.controller.adapter.PetAdapter;
 
@@ -105,7 +103,7 @@ public class HomeFragment extends Fragment {
         btnBoarding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), com.example.dr_pet.BoardingActivity.class);
+                Intent intent = new Intent(getActivity(), BoardingActivity.class);
                 startActivity(intent);
             }
         });
