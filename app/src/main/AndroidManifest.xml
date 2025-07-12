@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dr_Pet"
         tools:targetApi="31">
-
+        <activity
+            android:name=".controller.activity.ServiceListActivity"
+            android:exported="false" />
         <activity
             android:name=".controller.activity.BoardingActivity"
             android:exported="false" />

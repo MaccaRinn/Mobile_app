@@ -1,4 +1,4 @@
-package com.example.dr_pet.model;
+package com.example.dr_pet.Model;
 
 public class GroomingOrder {
     private String name;
