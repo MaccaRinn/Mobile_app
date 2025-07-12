@@ -54,6 +54,10 @@ public class Grooming extends AppCompatActivity {
         adapter = new GroomingAdapter(serviceList, service -> openServiceOrder(service));
         recyclerView.setAdapter(adapter);
         findViewById(R.id.btn_grooming_back1).setOnClickListener(v -> onBackPressed());
+        findViewById(R.id.btn_grooming_list).setOnClickListener(v -> {
+            Intent intent = new Intent(this, ServiceListActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void openServiceOrder(GroomingService service) {
