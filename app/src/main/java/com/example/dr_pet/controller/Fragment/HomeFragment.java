@@ -18,6 +18,7 @@ import com.example.dr_pet.R;
 import com.example.dr_pet.controller.activity.BoardingActivity;
 import com.example.dr_pet.controller.activity.Grooming;
 import com.example.dr_pet.controller.adapter.PetAdapter;
+import com.example.dr_pet.controller.activity.ShopActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +90,6 @@ public class HomeFragment extends Fragment {
         petReView.setAdapter(petAdapter);
 
 
-
         ImageButton btnGrooming = view.findViewById(R.id.btn_grooming);
         btnGrooming.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +107,16 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        ImageButton btnShop = view.findViewById(R.id.btn_service_shop);
+        btnShop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ShopActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return view;
         //return inflater.inflate(R.layout.fragment_home, container, false);
     }
