@@ -1,6 +1,7 @@
 package com.example.dr_pet.controller.activity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -31,7 +34,11 @@ public class AddPetActivity extends AppCompatActivity {
 
     Button btn_growth, btn_vaccine, btn_grooming, btn_savePet, btn_delete;
 
+    ImageButton btn_back;
+
     LinearLayout sectionGrowth, sectionVaccine, sectionGrooming;
+
+    ImageView  imagePet;
 
     EditText edtPName, edt_weight, edt_gender, edt_birthDate, edt_note;
 
@@ -48,6 +55,7 @@ public class AddPetActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         // Mapping
+        btn_back = findViewById(R.id.btn_back);
         btn_growth = findViewById(R.id.btn_growth);
         btn_vaccine = findViewById(R.id.btn_vaccine);
         btn_grooming = findViewById(R.id.btn_grooming);
@@ -60,6 +68,7 @@ public class AddPetActivity extends AppCompatActivity {
         setupToggle(btn_vaccine, sectionVaccine);
         setupToggle(btn_grooming, sectionGrooming);
 
+        imagePet = findViewById(R.id.imagePet);
         edtPName = findViewById(R.id.edtPName);
         edt_gender = findViewById(R.id.edt_gender);
         edt_birthDate = findViewById(R.id.edt_birth_date);
@@ -96,6 +105,7 @@ public class AddPetActivity extends AppCompatActivity {
         if (pet != null) {
             petId = pet.getPetId();
             edtPName.setText(pet.getName());
+            imagePet.setImageResource(pet.getPetUrl());
             edt_weight.setText(String.valueOf(pet.getWeight()));
             edt_gender.setText(pet.getGender());
             edt_note.setText(pet.getNote());
@@ -139,6 +149,12 @@ public class AddPetActivity extends AppCompatActivity {
                         Toast.makeText(AddPetActivity.this, "Xoá thất bại", Toast.LENGTH_SHORT).show();
                     });
         });
+
+
+         btn_back.setOnClickListener(v -> {
+             startActivity(new Intent(AddPetActivity.this, HomeActivity.class));
+             finish();
+         });
     }
 
     private void setupToggle(Button button, LinearLayout section) {
@@ -176,6 +192,11 @@ public class AddPetActivity extends AppCompatActivity {
        // species
         String selectedSpecies = spinner_species.getSelectedItem().toString();
         newPet.setSpecies(selectedSpecies);
+        if (selectedSpecies.equals("Chó")){
+            newPet.setPetUrl(R.drawable.default_dog_avatar);
+        }else{
+            newPet.setPetUrl(R.drawable.default_cat_avatar);
+        }
 
        // birthday
         String dateString = edt_birthDate.getText().toString();
