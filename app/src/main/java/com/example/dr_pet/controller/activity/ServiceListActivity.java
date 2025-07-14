@@ -7,13 +7,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.dr_pet.Model.ServiceOrder;
 import com.example.dr_pet.controller.adapter.ServiceListAdapter;
 import com.example.dr_pet.R;
 
 public class ServiceListActivity extends AppCompatActivity {
     private androidx.recyclerview.widget.RecyclerView recyclerServiceList;
     private ServiceListAdapter adapter;
-    private java.util.List<com.example.dr_pet.Model.GroomingOrder> serviceList = new java.util.ArrayList<>();
+    private java.util.List<ServiceOrder> serviceList = new java.util.ArrayList<>();
 
 
     @Override
@@ -46,7 +48,6 @@ public class ServiceListActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(android.widget.AdapterView<?> parent) {}
         });
-        // Load mặc định grooming
         loadServiceList("grooming");
     }
 
@@ -62,14 +63,13 @@ public class ServiceListActivity extends AppCompatActivity {
             public void onDataChange(com.google.firebase.database.DataSnapshot snapshot) {
                 serviceList.clear();
                 for (com.google.firebase.database.DataSnapshot orderSnap : snapshot.getChildren()) {
-                    com.example.dr_pet.Model.GroomingOrder order = orderSnap.getValue(com.example.dr_pet.Model.GroomingOrder.class);
+                    ServiceOrder order = orderSnap.getValue(ServiceOrder.class);
                     if (order != null) serviceList.add(order);
                 }
                 adapter.notifyDataSetChanged();
             }
             @Override
             public void onCancelled(com.google.firebase.database.DatabaseError error) {
-                // Handle error if needed
             }
         });
     }

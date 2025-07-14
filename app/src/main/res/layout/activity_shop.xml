@@ -32,11 +32,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="Shop"
-                android:textSize="24sp"
-                android:textStyle="bold"
                 android:textColor="#5D4037"
-                android:gravity="center" />
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <ImageButton
                 android:id="@+id/btnCart"
@@ -105,10 +105,10 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@drawable/circle_background"
+                    android:gravity="center"
                     android:text="All"
                     android:textColor="#666"
-                    android:textSize="12sp"
-                    android:gravity="center" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -126,8 +126,8 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@drawable/circle_background"
-                    android:src="@android:drawable/ic_menu_gallery"
-                    android:padding="8dp" />
+                    android:padding="8dp"
+                    android:src="@android:drawable/ic_menu_gallery" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -328,8 +328,8 @@
                 android:id="@+id/accessoryProduct1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginEnd="8dp"
+                android:layout_weight="1"
                 android:background="@drawable/product_background_blue"
                 android:orientation="vertical"
                 android:padding="12dp"
@@ -339,20 +339,20 @@
                     android:id="@+id/imgAccessoryProduct1"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
-                    android:src="@drawable/daylung"
-                    android:scaleType="centerCrop"
+                    android:layout_marginBottom="8dp"
                     android:background="@drawable/rounded_corner_background"
-                    android:layout_marginBottom="8dp" />
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/daylung" />
 
                 <TextView
                     android:id="@+id/txtAccessoryProduct1Name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
                     android:text="Dây dắt thú cưng cường lực màu hồng"
                     android:textColor="#5D4037"
                     android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="4dp" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtAccessoryProduct1Price"
@@ -370,8 +370,8 @@
                 android:id="@+id/accessoryProduct2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginStart="8dp"
+                android:layout_weight="1"
                 android:background="@drawable/product_background_blue"
                 android:orientation="vertical"
                 android:padding="12dp"
@@ -381,20 +381,20 @@
                     android:id="@+id/imgAccessoryProduct2"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
-                    android:src="@drawable/bat"
-                    android:scaleType="centerCrop"
+                    android:layout_marginBottom="8dp"
                     android:background="@drawable/rounded_corner_background"
-                    android:layout_marginBottom="8dp" />
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/bat" />
 
                 <TextView
                     android:id="@+id/txtAccessoryProduct2Name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
                     android:text="Bát ăn/uống thú cưng kép màu hồng"
                     android:textColor="#5D4037"
                     android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="4dp" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtAccessoryProduct2Price"

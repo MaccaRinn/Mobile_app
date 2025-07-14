@@ -1,24 +1,20 @@
 package com.example.dr_pet.Model;
 
-public class GroomingOrder {
-    private String name;
-    private String date;
-    private String note;
-    private String pet;
-    private String price;
-    private String id;
-
-    public GroomingOrder() {
-        // Required for Firebase
-    }
-
-    public GroomingOrder(String name, String date, String note, String pet, String price, String id) {
+public class ServiceOrder {
+    public String serviceOrderId;
+    public String name;
+    public String date;
+    public String note;
+    public String pet;
+    public String price;
+    public ServiceOrder() {}
+    public ServiceOrder(String serviceOrderId, String name, String date, String note, String pet, String price) {
+        this.serviceOrderId = serviceOrderId;
         this.name = name;
         this.date = date;
         this.note = note;
         this.pet = pet;
         this.price = price;
-        this.id = id;
     }
 
     public String getName() { return name; }
@@ -36,6 +32,6 @@ public class GroomingOrder {
     public String getPrice() { return price; }
     public void setPrice(String price) { this.price = price; }
 
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    public String getId() { return serviceOrderId; }
+    public void setId(String id) { this.serviceOrderId = id; }
 }

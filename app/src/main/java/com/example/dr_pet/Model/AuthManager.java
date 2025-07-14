@@ -1,4 +1,4 @@
-package com.example.dr_pet;
+package com.example.dr_pet.Model;
 
 import android.content.Context;
 import android.content.SharedPreferences;

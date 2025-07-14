@@ -9,13 +9,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.dr_pet.R;
-import com.example.dr_pet.Model.GroomingOrder;
+import com.example.dr_pet.Model.ServiceOrder;
 import java.util.List;
 
 public class ServiceListAdapter extends RecyclerView.Adapter<ServiceListAdapter.ServiceViewHolder> {
-    private List<GroomingOrder> serviceList;
+    private List<ServiceOrder> serviceList;
 
-    public ServiceListAdapter(List<GroomingOrder> serviceList) {
+    public ServiceListAdapter(List<ServiceOrder> serviceList) {
         this.serviceList = serviceList;
     }
 
@@ -28,7 +28,7 @@ public class ServiceListAdapter extends RecyclerView.Adapter<ServiceListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ServiceViewHolder holder, int position) {
-        GroomingOrder order = serviceList.get(position);
+        ServiceOrder order = serviceList.get(position);
         holder.txtServiceName.setText(order.getName());
         holder.txtServiceDate.setText("Date: " + order.getDate());
         holder.txtServiceNote.setText("Note: " + (order.getNote() == null ? "" : order.getNote()));

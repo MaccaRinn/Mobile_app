@@ -7,13 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.dr_pet.AuthManager;
+import com.example.dr_pet.Model.AuthManager;
 import com.example.dr_pet.Model.Pet;
 import com.example.dr_pet.R;
 import com.example.dr_pet.controller.activity.AddPetActivity;

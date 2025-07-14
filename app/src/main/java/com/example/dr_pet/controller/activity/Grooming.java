@@ -10,7 +10,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.dr_pet.AuthManager;
+import com.example.dr_pet.Model.AuthManager;
 import com.example.dr_pet.Model.GroomingService;
 import com.example.dr_pet.R;
 import com.example.dr_pet.controller.adapter.GroomingAdapter;

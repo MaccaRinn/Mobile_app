@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import android.widget.Toast;
+import com.example.dr_pet.Model.ServiceOrder;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -112,7 +113,7 @@ public class ServiceOrderActivity extends AppCompatActivity {
             txtPrice.setText(price + " VNĐ");
             imgService.setImageResource(imgRes);
         } catch (Exception e) {
-            Toast.makeText(this, "Lỗi UI: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "error: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
 
@@ -122,7 +123,6 @@ public class ServiceOrderActivity extends AppCompatActivity {
         String note = getIntent().getStringExtra("service_note");
         if (note != null) edtOrderNote.setText(note);
 
-        // ...existing code...
         btnConfirmOrder.setOnClickListener(v -> {
             EditText edtOrderDate = findViewById(R.id.edtOrderDate);
             String dateStr = edtOrderDate != null ? edtOrderDate.getText().toString() : "";
@@ -160,20 +160,23 @@ public class ServiceOrderActivity extends AppCompatActivity {
             // Determine service type from Intent
             String serviceType = getIntent().getStringExtra("service_type");
             if (serviceType == null || (!serviceType.equals("grooming") && !serviceType.equals("boarding"))) {
-                serviceType = "grooming"; // Default to grooming if not specified
+                serviceType = "grooming";
             }
+
+
+
             DatabaseReference serviceRef = FirebaseDatabase.getInstance()
                 .getReference("Account")
                 .child(userId)
                 .child("service")
                 .child(serviceType);
-            // Tạo node mới cho mỗi đơn đặt dịch vụ
+
             String serviceOrderId = serviceRef.push().getKey();
             if (serviceOrderId == null) {
                 Toast.makeText(ServiceOrderActivity.this, "Lỗi tạo đơn hàng!", Toast.LENGTH_LONG).show();
                 return;
             }
-            GroomingOrder order = new GroomingOrder(serviceOrderId, serviceName, dateStr, noteText, selectedPet, priceStr);
+            ServiceOrder order = new ServiceOrder(serviceOrderId, serviceName, dateStr, noteText, selectedPet, priceStr);
             serviceRef.child(serviceOrderId).setValue(order)
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(ServiceOrderActivity.this, "Đặt dịch vụ thành công!", Toast.LENGTH_LONG).show();
@@ -187,25 +190,6 @@ public class ServiceOrderActivity extends AppCompatActivity {
                 });
         });
 
-        // GroomingOrder class
-        // Bạn có thể đặt class này ở ngoài hoặc trong file này
-        class GroomingOrder {
-            public String serviceOrderId;
-            public String name;
-            public String date;
-            public String note;
-            public String pet;
-            public String price;
-            public GroomingOrder() {}
-            public GroomingOrder(String serviceOrderId, String name, String date, String note, String pet, String price) {
-                this.serviceOrderId = serviceOrderId;
-                this.name = name;
-                this.date = date;
-                this.note = note;
-                this.pet = pet;
-                this.price = price;
-            }
-        }
 
         // Lấy ngày đặt từ DatePicker khi xác nhận
         EditText edtOrderDate = findViewById(R.id.edtOrderDate);
@@ -236,21 +220,5 @@ public class ServiceOrderActivity extends AppCompatActivity {
     }
 
     // Thêm class GroomingOrder để lưu đơn đặt dịch vụ grooming
-    class GroomingOrder {
-        public String serviceOrderId;
-        public String name;
-        public String date;
-        public String note;
-        public String pet;
-        public String price;
-        public GroomingOrder() {}
-        public GroomingOrder(String serviceOrderId, String name, String date, String note, String pet, String price) {
-            this.serviceOrderId = serviceOrderId;
-            this.name = name;
-            this.date = date;
-            this.note = note;
-            this.pet = pet;
-            this.price = price;
-        }
-    }
+
 }

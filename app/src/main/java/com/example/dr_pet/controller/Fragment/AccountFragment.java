@@ -17,13 +17,10 @@ import com.example.dr_pet.Model.Account;
 import com.example.dr_pet.R;
 import com.example.dr_pet.controller.activity.HomeActivity;
 import com.example.dr_pet.controller.activity.LoginActivity;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
-import com.example.dr_pet.AuthManager;
+import com.example.dr_pet.Model.AuthManager;
 
 /**
  * A simple {@link Fragment} subclass.
