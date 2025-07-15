@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFCE9"
+    android:padding="16dp">
+
+    <!-- Back Button -->
+
+    <!-- Pet Image -->
+    <ImageButton
+        android:id="@+id/btn_back"
+        android:layout_width="104dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="24dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitStart"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imagePet"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/circle_background"
+        android:scaleType="centerCrop"
+        android:src="@drawable/default_cat_avatar"
+        app:layout_constraintTop_toBottomOf="@id/btn_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Pet Name -->
+    <EditText
+        android:id="@+id/edtPName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:inputType="text"
+        android:hint="Enter name"
+        app:layout_constraintTop_toBottomOf="@id/imagePet"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Detail Button -->
+    <Button
+        android:id="@+id/btn_growth"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#FDD991"
+        android:text="Detail"
+        android:textColor="#5C3B0C"
+        app:layout_constraintTop_toBottomOf="@id/edtPName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Detail Section -->
+    <LinearLayout
+        android:id="@+id/section_growth"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:visibility="gone"
+        android:background="#FFF3E0"
+        app:layout_constraintTop_toBottomOf="@id/btn_growth"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Species -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Species"
+            android:textColor="#5C3B0C"
+            android:textSize="14sp"
+            android:paddingTop="8dp" />
+        <Spinner
+            android:id="@+id/spinner_species"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown" />
+
+        <!-- Weight -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Weight (kg)"
+            android:textColor="#5C3B0C"
+            android:textSize="14sp"
+            android:paddingTop="8dp" />
+        <EditText
+            android:id="@+id/edt_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter weight"
+            android:inputType="numberDecimal"
+            android:background="@android:color/transparent"
+            android:textColor="#5C3B0C"
+            android:textSize="14sp" />
+
+        <!-- Gender -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Gender"
+            android:textColor="#5C3B0C"
+            android:textSize="14sp"
+            android:paddingTop="8dp" />
+        <EditText
+            android:id="@+id/edt_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter gender"
+            android:inputType="text"
+            android:background="@android:color/transparent"
+            android:textColor="#5C3B0C"
+            android:textSize="14sp" />
+
+        <!-- Birth Date -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Birth Date"
+            android:textColor="#5C3B0C"
+            android:textSize="14sp"
+            android:paddingTop="8dp" />
+        <EditText
+            android:id="@+id/edt_birth_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="yyyy-mm-dd"
+            android:focusable="false"
+            android:inputType="date"
+            android:background="@android:color/transparent"
+            android:textColor="#5C3B0C"
+            android:textSize="14sp" />
+
+        <!-- Note -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Note"
+            android:textColor="#5C3B0C"
+            android:textSize="14sp"
+            android:paddingTop="8dp" />
+        <EditText
+            android:id="@+id/edt_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Additional notes"
+            android:inputType="textMultiLine"
+            android:minLines="2"
+            android:background="@android:color/transparent"
+            android:textColor="#5C3B0C"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+
+    <!-- Vaccine Button -->
+    <Button
+        android:id="@+id/btn_vaccine"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#FDD991"
+        android:text="Vaccination Tracker"
+        android:textColor="#5C3B0C"
+        app:layout_constraintTop_toBottomOf="@id/section_growth"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Vaccine Section -->
+    <LinearLayout
+        android:id="@+id/section_vaccine"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:visibility="gone"
+        android:background="#E0F7FA"
+        app:layout_constraintTop_toBottomOf="@id/btn_vaccine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="12/02/2024 - Tiêm phòng dại\n12/05/2024 - Tiêm ngừa 5 bệnh"
+            android:textSize="14sp"
+            android:textColor="#004D40"/>
+    </LinearLayout>
+
+    <!-- Grooming Button -->
+    <Button
+        android:id="@+id/btn_grooming"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#FDD991"
+        android:text="Grooming Tracker"
+        android:textColor="#5C3B0C"
+        app:layout_constraintTop_toBottomOf="@id/section_vaccine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Grooming Section -->
+    <LinearLayout
+        android:id="@+id/section_grooming"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:visibility="gone"
+        android:background="#FFF8E1"
+        app:layout_constraintTop_toBottomOf="@id/btn_grooming"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="12/02/2024 - Tiêm phòng dại\n12/05/2024 - Tiêm ngừa 5 bệnh"
+            android:textSize="14sp"
+            android:textColor="#004D40"/>
+    </LinearLayout>
+
+    <!-- Save Button -->
+
+    <!-- Delete Button -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="311dp"
+        android:layout_height="152dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFB4A2"
+            android:text="Delete this Pet"
+            android:textColor="#D00000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.876" />
+
+        <Button
+            android:id="@+id/btn_savePet"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFB4A2"
+            android:text="Save"
+            android:textColor="#459945"
+            app:layout_constraintBottom_toTopOf="@+id/btn_delete"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.984" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        android:text="Cắt móng: 10/06/2024\nTắm: 20/06/2024"
+        android:textColor="#6A4E0B"
+        android:textSize="14sp"
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="50dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

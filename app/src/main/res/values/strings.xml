@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Dr_Pet</string>
+    <string name="default_web_client_id">196901719859-qmjpkk3b16ch3aldg7hl4um5k3cfsr54.apps.googleusercontent.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

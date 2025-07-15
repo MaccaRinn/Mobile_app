@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "196901719859",
+    "firebase_url": "https://drpet-699c2-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "drpet-699c2",
+    "storage_bucket": "drpet-699c2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:196901719859:android:657cfdba35aaaf4b127846",
+        "android_client_info": {
+          "package_name": "com.example.dr_pet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "196901719859-kmbkgtoeesqcbctfrkqhc3emg320fgcg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dr_pet",
+            "certificate_hash": "e8bb5a6735f9afda820e4b879f79fa0366204968"
+          }
+        },
+        {
+          "client_id": "196901719859-qmjpkk3b16ch3aldg7hl4um5k3cfsr54.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwlQ0bY2sc3rqvuSTsIGX6BY9CplVb_Uk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "196901719859-qmjpkk3b16ch3aldg7hl4um5k3cfsr54.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

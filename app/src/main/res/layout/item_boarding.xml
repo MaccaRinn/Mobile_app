@@ -1,0 +1,62 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_item_boarding"
+    android:padding="8dp"
+    android:layout_marginBottom="12dp"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:id="@+id/imgHotel"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:scaleType="centerCrop"
+        />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="12dp">
+
+        <TextView
+            android:id="@+id/txtHotelName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="#222" />
+
+        <TextView
+            android:id="@+id/txtHotelDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="13sp"
+            android:textColor="#666"
+            android:layout_marginStart="4dp"/>
+
+        <TextView
+            android:id="@+id/txtHotelPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="14sp"
+            android:textColor="#00796B"
+            android:layout_marginTop="4dp"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnBookNow"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:text="Book"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:backgroundTint="#F9B233"
+        android:layout_marginStart="8dp"/>
+</LinearLayout>
