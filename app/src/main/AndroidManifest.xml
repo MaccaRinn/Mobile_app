@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Dr_Pet"
         tools:targetApi="31">
         <activity
+            android:name=".controller.activity.AdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".controller.activity.ServiceListActivity"
             android:exported="false" />
         <activity
@@ -30,17 +33,13 @@
         <activity
             android:name=".controller.activity.ShopActivity"
             android:exported="false" />
-
         <activity
             android:name=".controller.activity.AllProductsActivity"
             android:exported="false"
             android:parentActivityName=".controller.activity.ShopActivity" />
-
         <activity
             android:name=".controller.activity.ShopProductDetailActivity"
             android:exported="false" />
-
-
         <activity
             android:name=".MainActivity"
             android:exported="false" />
@@ -80,9 +79,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-
     </application>
 
 </manifest>

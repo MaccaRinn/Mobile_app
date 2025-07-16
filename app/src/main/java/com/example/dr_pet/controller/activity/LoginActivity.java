@@ -3,6 +3,7 @@ package com.example.dr_pet.controller.activity;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.dr_pet.Model.Account;
 import com.example.dr_pet.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -13,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -27,10 +29,11 @@ import com.google.android.gms.tasks.Task;
 import java.util.Objects;
 
 import com.example.dr_pet.Model.AuthManager;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final int RC_SIGN_IN = 9001;  // Request code for Google sign-in
+  // Request code for Google sign-in
 
     private EditText loginEmail, loginPassword;
     private TextView signupRedirectText, forgotPassword;
@@ -77,6 +80,24 @@ public class LoginActivity extends AppCompatActivity {
                                         if (task.isSuccessful()) {
                                             if (Objects.requireNonNull(auth.getCurrentUser()).isEmailVerified()) {
                                                 Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                                String uid = auth.getCurrentUser().getUid();
+                                                FirebaseDatabase.getInstance().getReference("Account").child(uid).get()
+                                                                .addOnSuccessListener(dataSnapshot -> {
+                                                                    if(dataSnapshot.exists()){
+                                                                        Account currAccount = dataSnapshot.getValue(Account.class);
+                                                                        if (currAccount.getRole().equals("ROLE_ADMIN")) {
+                                                                            startActivity(new Intent(LoginActivity.this, AdminActivity.class));
+                                                                            finish();
+                                                                        }else {
+                                                                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                                                            finish();
+                                                                        }
+                                                                        AuthManager.setLoggedIn(LoginActivity.this, true);
+                                                                    }
+                                                                }).addOnFailureListener(e -> {
+                                                                    //to do if fail
+                                                            });
+
                                                 AuthManager.setLoggedIn(LoginActivity.this, true);
                                                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                                 finish();
