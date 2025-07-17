@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.dr_pet.AuthManager;
+import com.example.dr_pet.Model.AuthManager;
 import com.example.dr_pet.Model.Pet;
 import com.example.dr_pet.R;
 import com.example.dr_pet.controller.activity.AddPetActivity;

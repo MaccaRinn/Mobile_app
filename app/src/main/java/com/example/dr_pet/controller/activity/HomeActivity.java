@@ -11,7 +11,7 @@ import com.example.dr_pet.controller.Fragment.AccountFragment;
 import com.example.dr_pet.controller.Fragment.HomeFragment;
 import com.example.dr_pet.controller.Fragment.PetFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.example.dr_pet.AuthManager;
+import com.example.dr_pet.Model.AuthManager;
 
 import java.util.HashMap;
 import java.util.Map;

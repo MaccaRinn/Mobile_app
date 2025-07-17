@@ -26,7 +26,7 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.Objects;
 
-import com.example.dr_pet.AuthManager;
+import com.example.dr_pet.Model.AuthManager;
 
 public class LoginActivity extends AppCompatActivity {
 
