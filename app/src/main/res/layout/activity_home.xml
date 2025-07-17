@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/mainbackground"
     android:textAlignment="center"
-    tools:context=".controller.activity.HomeActivity">
+    tools:context="activity.HomeActivity">
 
     <!-- Các nút hình tròn -->
 
@@ -33,7 +33,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"
-        android:name="com.example.dr_pet.controller.Fragment.HomeFragment"
+        android:name="com.example.dr_pet.fragment.HomeFragment"
         android:layout_width="404dp"
         android:layout_height="804dp"
         android:layout_marginStart="5dp"
