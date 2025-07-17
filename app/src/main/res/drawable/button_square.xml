@@ -1,0 +1,8 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#ffe1a5" /> <!-- màu nền nút -->
+    <corners android:radius="0dp" /> <!-- bo góc 0 để vuông -->
+    <stroke
+        android:width="2dp"
+        android:color="#ffe1a5" /> <!-- viền nút (tuỳ chọn) -->
+</shape>

@@ -97,10 +97,6 @@ public class LoginActivity extends AppCompatActivity {
                                                                 }).addOnFailureListener(e -> {
                                                                     //to do if fail
                                                             });
-
-                                                AuthManager.setLoggedIn(LoginActivity.this, true);
-                                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                                                finish();
                                             } else {
                                                 Toast.makeText(LoginActivity.this, "Please verify your email before logging in.", Toast.LENGTH_LONG).show();
                                                 FirebaseAuth.getInstance().signOut();

@@ -57,14 +57,6 @@ public class Account {
         this.accUrl = accUrl;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public String getRole() {
         return role;
     }
@@ -73,13 +65,21 @@ public class Account {
         this.role = role;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public Account() {
     }
 
-    public Account(String email, String lastName, String firstName, String address, int accUrl, String role, String phoneNumber) {
+    public Account(String email, String firstName, String lastName, String address, int accUrl, String role, String phoneNumber) {
         this.email = email;
-        this.lastName = lastName;
         this.firstName = firstName;
+        this.lastName = lastName;
         this.address = address;
         this.accUrl = accUrl;
         this.role = role;
