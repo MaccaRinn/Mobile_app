@@ -27,20 +27,6 @@
 
 
     <ImageButton
-        android:id="@+id/btn_grooming_list"
-        android:layout_width="63dp"
-        android:layout_height="59dp"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="39dp"
-        android:layout_marginEnd="15dp"
-        android:background="@drawable/grooming"
-        android:scaleType="centerInside"
-        android:text="Cắt tỉa cơ bản"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/grooming_title"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
         android:id="@+id/btn_grooming_back1"
         android:layout_width="39dp"
         android:layout_height="32dp"
