@@ -75,9 +75,15 @@ public class AddPetActivity extends AppCompatActivity {
         txtGroomingDetail = findViewById(R.id.txtGroomingDetail);
         txtBoardingDetail = findViewById(R.id.txtBoardingDetail);
 
-        setupToggle(btn_growth, sectionGrowth);
-        setupToggle(btn_boarding, sectionBoarding);
-        setupToggle(btn_grooming, sectionGrooming);
+
+        LinearLayout[] allSections = {
+               sectionBoarding,sectionGrooming,sectionGrowth
+        };
+
+        setupToggle(btn_growth, sectionGrowth, allSections);
+        setupToggle(btn_boarding, sectionBoarding, allSections);
+        setupToggle(btn_grooming, sectionGrooming, allSections);
+
 
         imagePet = findViewById(R.id.imagePet);
         edtPName = findViewById(R.id.edtPName);
@@ -176,10 +182,8 @@ public class AddPetActivity extends AppCompatActivity {
                         txtBoardingDetail.setText("No boarding details available.");
                     }
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-
                 }
             });
 
@@ -276,8 +280,17 @@ public class AddPetActivity extends AppCompatActivity {
          });
     }
 
-    private void setupToggle(Button button, LinearLayout section) {
+
+    private void setupToggle(Button button, LinearLayout section, LinearLayout[] allSections) {
         button.setOnClickListener(v -> {
+            // Hide all sections first
+            for (LinearLayout sec : allSections) {
+                if (sec != section) {
+                    sec.animate().alpha(0f).setDuration(300).withEndAction(() -> sec.setVisibility(View.GONE)).start();
+                }
+            }
+
+            // Toggle the visibility of the current section
             if (section.getVisibility() == View.GONE) {
                 section.setVisibility(View.VISIBLE);
                 section.setAlpha(0f);
@@ -287,6 +300,7 @@ public class AddPetActivity extends AppCompatActivity {
             }
         });
     }
+
 
     public void SaveAndUpdatePets() {
         String uid = auth.getCurrentUser().getUid();
@@ -317,16 +331,25 @@ public class AddPetActivity extends AppCompatActivity {
             newPet.setPetUrl(R.drawable.default_cat_avatar);
         }
 
-       // birthday
         String dateString = edt_birthDate.getText().toString();
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 LocalDate birthDate = LocalDate.parse(dateString, formatter);
+
+                // Get the current date
+                LocalDate currentDate = LocalDate.now();
+
+                // Check if the birth date is after the current date
+                if (birthDate.isAfter(currentDate)) {
+                    Toast.makeText(this, "Birth date cannot be after today's date", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 newPet.setBrithDate(birthDate.format(formatter));
             }
         } catch (Exception e) {
-            Toast.makeText(this, "Please enter the valid birhtday", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter a valid birthday", Toast.LENGTH_SHORT).show();
             return;
         }
 

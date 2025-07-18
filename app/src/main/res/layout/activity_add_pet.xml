@@ -192,14 +192,13 @@
         app:layout_constraintTop_toBottomOf="@id/btn_boarding"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
-
         <TextView
             android:id="@+id/txtBoardingDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="No Detail"
-            android:textColor="#004D40"
-            android:textSize="14sp" />
+            android:text="12/02/2024 - Tiêm phòng dại\n12/05/2024 - Tiêm ngừa 5 bệnh"
+            android:textSize="14sp"
+            android:textColor="#004D40"/>
     </LinearLayout>
 
     <!-- Grooming Button -->
@@ -230,14 +229,13 @@
         app:layout_constraintTop_toBottomOf="@id/btn_grooming"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
-
         <TextView
             android:id="@+id/txtGroomingDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="No Detail"
-            android:textColor="#004D40"
-            android:textSize="14sp" />
+            android:text="12/02/2024 - Tiêm phòng dại\n12/05/2024 - Tiêm ngừa 5 bệnh"
+            android:textSize="14sp"
+            android:textColor="#004D40"/>
     </LinearLayout>
 
 
