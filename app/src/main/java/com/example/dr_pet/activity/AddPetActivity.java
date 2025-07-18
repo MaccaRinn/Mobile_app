@@ -12,16 +12,21 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dr_pet.R;
 import com.example.dr_pet.model.Pet;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -31,11 +36,11 @@ public class AddPetActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
 
-    Button btn_growth, btn_vaccine, btn_grooming, btn_savePet, btn_delete;
+    Button btn_growth, btn_medical, btn_grooming, btn_boarding,btn_savePet, btn_delete;
 
     ImageButton btn_back;
 
-    LinearLayout sectionGrowth, sectionVaccine, sectionGrooming;
+    LinearLayout sectionGrowth, sectionGrooming, sectionBoarding;
 
     ImageView  imagePet;
 
@@ -44,6 +49,8 @@ public class AddPetActivity extends AppCompatActivity {
     Spinner spinner_species;
 
     String petId;
+
+    TextView txtGroomingDetail, txtBoardingDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,15 +63,20 @@ public class AddPetActivity extends AppCompatActivity {
         // Mapping
         btn_back = findViewById(R.id.btn_back);
         btn_growth = findViewById(R.id.btn_growth);
-        btn_vaccine = findViewById(R.id.btn_vaccine);
+        btn_boarding = findViewById(R.id.btn_boarding);
         btn_grooming = findViewById(R.id.btn_grooming);
+
         btn_delete = findViewById(R.id.btn_delete);
         btn_savePet = findViewById(R.id.btn_savePet);
         sectionGrooming = findViewById(R.id.section_grooming);
         sectionGrowth = findViewById(R.id.section_growth);
-        sectionVaccine = findViewById(R.id.section_vaccine);
+        sectionBoarding = findViewById(R.id.section_boarding);
+
+        txtGroomingDetail = findViewById(R.id.txtGroomingDetail);
+        txtBoardingDetail = findViewById(R.id.txtBoardingDetail);
+
         setupToggle(btn_growth, sectionGrowth);
-        setupToggle(btn_vaccine, sectionVaccine);
+        setupToggle(btn_boarding, sectionBoarding);
         setupToggle(btn_grooming, sectionGrooming);
 
         imagePet = findViewById(R.id.imagePet);
@@ -74,6 +86,8 @@ public class AddPetActivity extends AppCompatActivity {
         edt_note = findViewById(R.id.edt_note);
         edt_weight = findViewById(R.id.edt_weight);
         spinner_species = findViewById(R.id.spinner_species);
+
+
 
         // Spinner species
         String[] speciesList = {"Chó", "Mèo"};
@@ -110,6 +124,73 @@ public class AddPetActivity extends AppCompatActivity {
             edt_note.setText(pet.getNote());
             edt_birthDate.setText(pet.getBrithDate());
 
+            String uid = auth.getCurrentUser().getUid();
+
+            DatabaseReference groomingRef = FirebaseDatabase.getInstance().getReference("Account").
+                    child(uid).child("service").child("grooming");
+
+            groomingRef.orderByChild("petId").equalTo(petId).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()){
+                        StringBuilder groomingDetails = new StringBuilder();
+                        for (DataSnapshot serviceSnapshot : snapshot.getChildren()) {
+
+                            String groomingDate = serviceSnapshot.child("date").getValue(String.class);
+                            String groomingNotes = serviceSnapshot.child("name").getValue(String.class);
+
+                            groomingDetails.append(groomingDate)
+                                    .append(" - ").append(groomingNotes).append("\n");
+                        }
+                        txtGroomingDetail.setText(groomingDetails.toString());
+                    }
+                    else {
+                        txtGroomingDetail.setText("No grooming details available.");
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+
+            DatabaseReference broadingRef = FirebaseDatabase.getInstance().getReference("Account").
+                    child(uid).child("service").child("boarding");
+
+            broadingRef.orderByChild("petId").equalTo(petId).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        StringBuilder boardingDetails = new StringBuilder();
+                        for (DataSnapshot serviceSnapshot : snapshot.getChildren()) {
+
+                            String groomingDate = serviceSnapshot.child("date").getValue(String.class);
+                            String groomingNotes = serviceSnapshot.child("name").getValue(String.class);
+
+                            boardingDetails.append(groomingDate)
+                                    .append(" - ").append(groomingNotes).append("\n");
+                        }
+                        txtBoardingDetail.setText(boardingDetails.toString());
+                    } else {
+                        txtBoardingDetail.setText("No boarding details available.");
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
+
+
+
+
+
+
+
             // Set species
             for (int i = 0; i < speciesList.length; i++) {
                 if (speciesList[i].equals(pet.getSpecies())) {
@@ -133,19 +214,58 @@ public class AddPetActivity extends AppCompatActivity {
             }
 
             String uid = auth.getCurrentUser().getUid();
-            DatabaseReference dbRef = FirebaseDatabase.getInstance()
+            DatabaseReference petRef = FirebaseDatabase.getInstance()
                     .getReference("Account")
                     .child(uid)
                     .child("pet")
                     .child(petId);
 
-            dbRef.removeValue()
+            petRef.removeValue()
                     .addOnSuccessListener(aVoid -> {
-                        Toast.makeText(AddPetActivity.this, "Đã xoá thú cưng", Toast.LENGTH_SHORT).show();
+                        DatabaseReference groomingRef = FirebaseDatabase.getInstance().getReference("Account")
+                                .child(uid).child("service").child("grooming");
+
+                        // xoa grooming
+                        groomingRef.orderByChild("petId").equalTo(petId)
+                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        for (DataSnapshot serviceSnapshot : snapshot.getChildren()) {
+                                            serviceSnapshot.getRef().removeValue();
+                                        }
+
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        Toast.makeText(AddPetActivity.this, "Delete Service fail", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                        DatabaseReference boardingRef = FirebaseDatabase.getInstance().
+                                getReference("Account").child(uid).child("service").child("boarding");
+
+                        // delete boarding
+                        boardingRef.orderByChild("petId").equalTo(petId).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot serviceSnapshot : snapshot.getChildren()){
+                                    serviceSnapshot.getRef().removeValue();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                Toast.makeText(AddPetActivity.this, "Delete Service fail", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                        Toast.makeText(AddPetActivity.this, "Delete Pet successfully", Toast.LENGTH_SHORT).show();
                         finish();
+
                     })
                     .addOnFailureListener(e -> {
-                        Toast.makeText(AddPetActivity.this, "Xoá thất bại", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddPetActivity.this, "Delete Pet fail", Toast.LENGTH_SHORT).show();
+
                     });
         });
 

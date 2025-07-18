@@ -15,9 +15,6 @@ public class Pet implements Serializable{
     private String note;
 
 
-
-
-
     public String getName() {
         return name;
     }
