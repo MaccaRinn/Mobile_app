@@ -186,15 +186,6 @@ public class AddPetActivity extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
                 }
             });
-
-
-
-
-
-
-
-
-
             // Set species
             for (int i = 0; i < speciesList.length; i++) {
                 if (speciesList[i].equals(pet.getSpecies())) {

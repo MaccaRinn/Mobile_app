@@ -18,9 +18,6 @@
             android:name=".activity.AdminActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.ServiceListActivity"
-            android:exported="false" />
-        <activity
             android:name=".activity.BoardingActivity"
             android:exported="false" />
         <activity

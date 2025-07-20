@@ -37,12 +37,12 @@
         android:text="Grooming"
         android:textColor="#4e3213"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toStartOf="@+id/btn_adminShopping"
+        app:layout_constraintEnd_toStartOf="@+id/btn_adminMedical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
 
     <Button
-        android:id="@+id/btn_adminShopping"
+        android:id="@+id/btn_adminMedical"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -66,12 +66,12 @@
         android:text="Boarding"
         android:textColor="#4e3213"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toStartOf="@+id/btn_adminPet"
+        app:layout_constraintEnd_toStartOf="@+id/btn_adminShop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_adminGrooming" />
 
     <Button
-        android:id="@+id/btn_adminPet"
+        android:id="@+id/btn_adminShop"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -82,7 +82,7 @@
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btn_adminBoarding"
-        app:layout_constraintTop_toBottomOf="@id/btn_adminShopping" />
+        app:layout_constraintTop_toBottomOf="@id/btn_adminMedical" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="378dp"
@@ -150,7 +150,7 @@
             android:layout_marginTop="16dp"
             android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.474"
+            app:layout_constraintHorizontal_bias="0.427"
             app:layout_constraintStart_toEndOf="@+id/textView15"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -177,7 +177,7 @@
             app:layout_constraintTop_toBottomOf="@+id/txtBoarding" />
 
         <TextView
-            android:id="@+id/totalShoping"
+            android:id="@+id/txtShopping"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"

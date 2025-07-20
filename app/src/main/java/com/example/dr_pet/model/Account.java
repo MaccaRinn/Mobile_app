@@ -10,7 +10,12 @@ public class Account {
     private String address;
     private int accUrl;
 
-    private String role;
+    private String Role;
+
+
+    public void setAccUrl(int accUrl) {
+        this.accUrl = accUrl;
+    }
 
     private String phoneNumber;
 
@@ -50,17 +55,7 @@ public class Account {
         return accUrl;
     }
 
-    public void setAccUrl(int accUrl) {
-        this.accUrl = accUrl;
-    }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -70,16 +65,25 @@ public class Account {
         this.phoneNumber = phoneNumber;
     }
 
+
+    public String getRole() {
+        return Role;
+    }
+
+    public void setRole(String role) {
+        Role = role;
+    }
+
     public Account() {
     }
 
-    public Account(String email, String firstName, String lastName, String address, int accUrl, String role, String phoneNumber) {
+    public Account(String email, String firstName, String lastName, String address, String role, int accUrl, String phoneNumber) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
+        Role = role;
         this.accUrl = accUrl;
-        this.role = role;
         this.phoneNumber = phoneNumber;
     }
 }
