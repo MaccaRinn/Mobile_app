@@ -4,4 +4,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+
+    <string-array name="services">
+        <item>Tiêm phòng</item>
+        <item>Triệt sản</item>
+        <item>Spa</item>
+    </string-array>
 </resources>
