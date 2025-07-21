@@ -8,15 +8,40 @@ public class Pet implements Serializable {
 
     private  String name;
     private  String species;
-    private  float  weight;
+    private  double  weight;
     private  int petUrl;
     private  String gender;
     private String brithDate;
     private String note;
 
+    private double height;
 
+    public Pet(String name, String species, double weight, double height, int petUrl, String gender, String brithDate, String note) {
+        this.name = name;
+        this.species = species;
+        this.weight = weight;
+        this.petUrl = petUrl;
+        this.gender = gender;
+        this.brithDate = brithDate;
+        this.note = note;
+        this.height = height;
+    }
 
+    public double getWeight() {
+        return weight;
+    }
 
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
 
     public String getName() {
         return name;
@@ -32,14 +57,6 @@ public class Pet implements Serializable {
 
     public void setSpecies(String species) {
         this.species = species;
-    }
-
-    public float getWeight() {
-        return weight;
-    }
-
-    public void setWeight(float weight) {
-        this.weight = weight;
     }
 
     public String getGender() {
