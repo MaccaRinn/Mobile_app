@@ -7,14 +7,16 @@ public class ServiceOrder {
     public String note;
     public String petId;
     public String price;
+    public String status; // pending, missed, completed
     public ServiceOrder() {}
-    public ServiceOrder(String serviceOrderId, String name, String date, String note, String pet, String price) {
+    public ServiceOrder(String serviceOrderId, String name, String date, String note, String pet, String price, String status) {
         this.serviceOrderId = serviceOrderId;
         this.name = name;
         this.date = date;
         this.note = note;
         this.petId = pet;
         this.price = price;
+        this.status = status;
     }
 
     public String getName() { return name; }
@@ -34,4 +36,6 @@ public class ServiceOrder {
 
     public String getId() { return serviceOrderId; }
     public void setId(String id) { this.serviceOrderId = id; }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }
