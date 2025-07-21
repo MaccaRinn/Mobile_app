@@ -66,7 +66,6 @@ public class ServiceOrderActivity extends AppCompatActivity {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user != null) {
                 String userId = user.getUid();
-                // Sửa lại đường dẫn đúng với cấu trúc dữ liệu pets trong Firebase
                 DatabaseReference petsRef = FirebaseDatabase.getInstance().getReference("Account").child(userId).child("pet");
                 petsRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -83,7 +82,7 @@ public class ServiceOrderActivity extends AppCompatActivity {
                                 }
                             }
                         }
-                        isPetLoaded = true;  // Đánh dấu đã load xong dữ liệu pets
+                        isPetLoaded = true;
                     }
 
                     @Override
@@ -187,7 +186,26 @@ public class ServiceOrderActivity extends AppCompatActivity {
                 Toast.makeText(ServiceOrderActivity.this, "Lỗi tạo đơn hàng!", Toast.LENGTH_LONG).show();
                 return;
             }
-            ServiceOrder order = new ServiceOrder(serviceOrderId, serviceName, dateStr, noteText, selectedPetId, priceStr);
+
+            //Status dịch vụ
+            String status;
+            try {
+                java.util.Date selectedDate = sdf.parse(dateStr);
+                java.util.Calendar now = java.util.Calendar.getInstance();
+                now.set(java.util.Calendar.HOUR_OF_DAY, 0);
+                now.set(java.util.Calendar.MINUTE, 0);
+                now.set(java.util.Calendar.SECOND, 0);
+                now.set(java.util.Calendar.MILLISECOND, 0);
+                java.util.Date today = now.getTime();
+                if (selectedDate.before(today)) {
+                    status = "missed";
+                } else {
+                    status = "pending";
+                }
+            } catch (Exception ex) {
+                status = "pending";
+            }
+            ServiceOrder order = new ServiceOrder(serviceOrderId, serviceName, dateStr, noteText, selectedPetId, priceStr, status);
             serviceRef.child(serviceOrderId).setValue(order)
                     .addOnSuccessListener(aVoid -> {
                         Toast.makeText(ServiceOrderActivity.this, "Đặt dịch vụ thành công!", Toast.LENGTH_LONG).show();

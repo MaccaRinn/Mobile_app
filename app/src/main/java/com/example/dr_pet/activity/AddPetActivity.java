@@ -141,12 +141,13 @@ public class AddPetActivity extends AppCompatActivity {
                     if (snapshot.exists()){
                         StringBuilder groomingDetails = new StringBuilder();
                         for (DataSnapshot serviceSnapshot : snapshot.getChildren()) {
-
                             String groomingDate = serviceSnapshot.child("date").getValue(String.class);
                             String groomingNotes = serviceSnapshot.child("name").getValue(String.class);
-
+                            String status = serviceSnapshot.child("status").getValue(String.class);
                             groomingDetails.append(groomingDate)
-                                    .append(" - ").append(groomingNotes).append("\n");
+                                    .append(" - ").append(groomingNotes)
+                                    .append(status != null ? " (" + status + ")" : "")
+                                    .append("\n");
                         }
                         txtGroomingDetail.setText(groomingDetails.toString());
                     }
@@ -170,12 +171,13 @@ public class AddPetActivity extends AppCompatActivity {
                     if (snapshot.exists()) {
                         StringBuilder boardingDetails = new StringBuilder();
                         for (DataSnapshot serviceSnapshot : snapshot.getChildren()) {
-
-                            String groomingDate = serviceSnapshot.child("date").getValue(String.class);
-                            String groomingNotes = serviceSnapshot.child("name").getValue(String.class);
-
-                            boardingDetails.append(groomingDate)
-                                    .append(" - ").append(groomingNotes).append("\n");
+                            String boardingDate = serviceSnapshot.child("date").getValue(String.class);
+                            String boardingNotes = serviceSnapshot.child("name").getValue(String.class);
+                            String status = serviceSnapshot.child("status").getValue(String.class);
+                            boardingDetails.append(boardingDate)
+                                    .append(" - ").append(boardingNotes)
+                                    .append(status != null ? " (" + status + ")" : "")
+                                    .append("\n");
                         }
                         txtBoardingDetail.setText(boardingDetails.toString());
                     } else {
