@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.content.Intent;
 import android.widget.ImageButton;
 
+import com.example.dr_pet.activity.MedicalActivity;
 import com.example.dr_pet.model.Pet;
 import com.example.dr_pet.R;
 import com.example.dr_pet.activity.BoardingActivity;
@@ -97,6 +98,12 @@ public class HomeFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), Grooming.class);
                 startActivity(intent);
             }
+        });
+
+        ImageButton btnMedical = view.findViewById(R.id.btn_medical);
+        btnMedical.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), MedicalActivity.class);
+            startActivity(intent);
         });
 
         ImageButton btnBoarding = view.findViewById(R.id.btn_boarding);

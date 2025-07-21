@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/mainbackground"
+    android:orientation="vertical"
+    tools:context=".controller.activity.MedicalActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/btn_medical_back"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:srcCompat="@drawable/ic_arrow_back" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="277dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Health Care"
+            android:textAlignment="center"
+            android:textColor="#5B3A00"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="32dp"
+            android:layout_height="32dp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="My Pet"
+        android:textColor="#5B3A00"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerMedical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp" />
+</LinearLayout>

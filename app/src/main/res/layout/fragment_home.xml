@@ -107,7 +107,7 @@
                 app:layout_constraintEnd_toEndOf="@id/btn_grooming"/>
 
             <ImageButton
-                android:id="@+id/btn_healthcare"
+                android:id="@+id/btn_medical"
                 android:layout_width="63dp"
                 android:layout_height="63dp"
                 android:layout_marginStart="36dp"
@@ -123,9 +123,9 @@
                 android:text="Medical"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                app:layout_constraintTop_toBottomOf="@id/btn_healthcare"
-                app:layout_constraintStart_toStartOf="@id/btn_healthcare"
-                app:layout_constraintEnd_toEndOf="@id/btn_healthcare"/>
+                app:layout_constraintTop_toBottomOf="@id/btn_medical"
+                app:layout_constraintStart_toStartOf="@id/btn_medical"
+                app:layout_constraintEnd_toEndOf="@id/btn_medical"/>
 
             <ImageButton
                 android:id="@+id/btn_boarding"
@@ -134,7 +134,7 @@
                 android:layout_marginStart="36dp"
                 android:background="@drawable/circle_background"
                 android:scaleType="centerInside"
-                app:layout_constraintStart_toEndOf="@id/btn_healthcare"
+                app:layout_constraintStart_toEndOf="@id/btn_medical"
                 app:layout_constraintTop_toTopOf="@id/btn_grooming"
                 app:srcCompat="@drawable/grooming" />
 

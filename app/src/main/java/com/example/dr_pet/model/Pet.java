@@ -8,12 +8,46 @@ public class Pet implements Serializable{
 
     private  String name;
     private  String species;
-    private  float  weight;
+    private  double weight;
     private  int petUrl;
     private  String gender;
     private String brithDate;
     private String note;
 
+    private double height;
+
+    public Pet(String name, String species, double weight, double height, int petUrl, String gender, String brithDate, String note) {
+        this.name = name;
+        this.species = species;
+        this.weight = weight;
+        this.petUrl = petUrl;
+        this.gender = gender;
+        this.brithDate = brithDate;
+        this.note = note;
+        this.height = height;
+    }
+
+    public Pet() {
+    }
+
+    public Pet(String name, String species, float weight, int petUrl, String gender, String brithDate, String note) {
+        this.name = name;
+        this.species = species;
+        this.weight = weight;
+        this.petUrl = petUrl;
+        this.gender = gender;
+        this.brithDate = brithDate;
+        this.note = note;
+
+    }
+
+    public String getPetId() {
+        return petId;
+    }
+
+    public void setPetId(String petId) {
+        this.petId = petId;
+    }
 
     public String getName() {
         return name;
@@ -31,20 +65,12 @@ public class Pet implements Serializable{
         this.species = species;
     }
 
-    public float getWeight() {
+    public double getWeight() {
         return weight;
     }
 
-    public void setWeight(float weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
     }
 
     public int getPetUrl() {
@@ -53,6 +79,14 @@ public class Pet implements Serializable{
 
     public void setPetUrl(int petUrl) {
         this.petUrl = petUrl;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getBrithDate() {
@@ -71,29 +105,11 @@ public class Pet implements Serializable{
         this.note = note;
     }
 
-
-
-
-    public Pet() {
+    public double getHeight() {
+        return height;
     }
 
-    public Pet(String name, String species, float weight, int petUrl, String gender, String brithDate, String note) {
-        this.name = name;
-        this.species = species;
-        this.weight = weight;
-        this.petUrl = petUrl;
-        this.gender = gender;
-        this.brithDate = brithDate;
-        this.note = note;
-
-    }
-
-    public void setPetId(String petId){
-        this.petId = petId;
-    }
-
-
-    public String getPetId() {
-        return  petId;
+    public void setHeight(double height) {
+        this.height = height;
     }
 }
