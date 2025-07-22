@@ -9,7 +9,6 @@ public class Appointment {
     private String petId;
     private String status;
 
-    // Firebase bắt buộc có no-arg constructor
     public Appointment() { }
 
     public Appointment(String name,

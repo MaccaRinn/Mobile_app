@@ -29,7 +29,6 @@ public class MedicalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medical);
 
-        // Kiểm tra đăng nhập trước khi cho vào dịch vụ grooming
         if (!AuthManager.isLoggedIn(this)) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
