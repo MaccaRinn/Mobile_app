@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.ArrayAdapter;
 
 import android.widget.Toast;
 import com.example.dr_pet.model.ServiceOrder;
@@ -55,6 +57,35 @@ public class ServiceOrderActivity extends AppCompatActivity {
             });
 
             ImageView imgService = findViewById(R.id.imgServiceOrder);
+            // Giờ hẹn hợp lệ
+            TextView txtOrderHour = findViewById(R.id.txtOrderHour);
+            ArrayList<String> validHours = new ArrayList<>();
+            txtOrderHour.setOnClickListener(v -> {
+                // Mở TimePickerDialog dạng spinner
+                java.util.Calendar calendar = java.util.Calendar.getInstance();
+                int hour = calendar.get(java.util.Calendar.HOUR_OF_DAY);
+                int minute = calendar.get(java.util.Calendar.MINUTE);
+                android.app.TimePickerDialog timePickerDialog = new android.app.TimePickerDialog(
+                        ServiceOrderActivity.this,
+                        android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
+                        (view, selectedHour, selectedMinute) -> {
+                            String picked = String.format("%02d:%02d", selectedHour, selectedMinute);
+                            boolean isValid = false;
+                            int totalMinutes = selectedHour * 60 + selectedMinute;
+                            if ((totalMinutes >= 8*60+30 && totalMinutes <= 10*60+30) || (totalMinutes >= 13*60+30 && totalMinutes <= 17*60+30)) {
+                                isValid = true;
+                            }
+                            if (isValid) {
+                                txtOrderHour.setText(picked);
+                            } else {
+                                Toast.makeText(ServiceOrderActivity.this, "Chỉ được chọn từ 08:30-10:30 hoặc 13:30-17:30!", Toast.LENGTH_LONG).show();
+                                txtOrderHour.setText("");
+                            }
+                        },
+                        hour, minute, true
+                );
+                timePickerDialog.show();
+            });
             txtName = findViewById(R.id.txtServiceOrderName);
             txtPrice = findViewById(R.id.txtServiceOrderPrice);
 
@@ -79,7 +110,7 @@ public class ServiceOrderActivity extends AppCompatActivity {
                                 if (petName != null && petId != null) {
                                     petNames.add(petName);
                                     petIds.add(petId);
-                                }
+                               }
                             }
                         }
                         isPetLoaded = true;
@@ -93,27 +124,15 @@ public class ServiceOrderActivity extends AppCompatActivity {
                 });
             }
 
-            // Chỉ hiện dialog chọn pet khi dữ liệu pets đã load xong
             txtPetChooser.setOnClickListener(v -> {
-                if (!isPetLoaded) {
-                    Toast.makeText(ServiceOrderActivity.this, "Đang tải danh sách pet, vui lòng đợi...", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (petNames.isEmpty()) {
-                    Toast.makeText(ServiceOrderActivity.this, "Bạn chưa có pet nào, vui lòng thêm pet trước.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 AlertDialog.Builder builder = new AlertDialog.Builder(ServiceOrderActivity.this);
                 builder.setTitle("Chọn pet");
                 builder.setItems(petNames.toArray(new String[0]), (dialog, which) -> {
-                    // Lưu petId được chọn
                     selectedPetId = petIds.get(which);
-                    // Hiển thị tên pet lên TextView
                     txtPetChooser.setText(petNames.get(which));
                 });
                 builder.show();
             });
-
             // Nhận dữ liệu từ Intent
             String name = getIntent().getStringExtra("service_name");
             int price = getIntent().getIntExtra("service_price", 0);
@@ -136,6 +155,12 @@ public class ServiceOrderActivity extends AppCompatActivity {
             String noteText = edtOrderNote.getText().toString();
             String serviceName = txtName.getText().toString();
             String priceStr = txtPrice.getText().toString();
+            TextView txtOrderHour = findViewById(R.id.txtOrderHour);
+            String hourStr = txtOrderHour.getText().toString();
+            if (hourStr.isEmpty()) {
+                Toast.makeText(ServiceOrderActivity.this, "Vui lòng chọn giờ hẹn!", Toast.LENGTH_LONG).show();
+                return;
+            }
 
             // Kiểm tra ngày hợp lệ
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
@@ -157,17 +182,12 @@ public class ServiceOrderActivity extends AppCompatActivity {
                 return;
             }
 
-            // Kiểm tra đã chọn pet chưa
             if (selectedPetId == null) {
                 Toast.makeText(ServiceOrderActivity.this, "Vui lòng chọn pet trước khi đặt dịch vụ", Toast.LENGTH_LONG).show();
                 return;
             }
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            if (user == null) {
-                Toast.makeText(ServiceOrderActivity.this, "Chưa đăng nhập!", Toast.LENGTH_LONG).show();
-                return;
-            }
             String userId = user.getUid();
 
             String serviceType = getIntent().getStringExtra("service_type");
@@ -191,13 +211,21 @@ public class ServiceOrderActivity extends AppCompatActivity {
             String status;
             try {
                 java.util.Date selectedDate = sdf.parse(dateStr);
+                java.util.Calendar selectedCal = java.util.Calendar.getInstance();
+                selectedCal.setTime(selectedDate);
+
+                int hour = 0, minute = 0;
+                if (hourStr != null && hourStr.contains(":")) {
+                    String[] parts = hourStr.split(":");
+                    hour = Integer.parseInt(parts[0]);
+                    minute = Integer.parseInt(parts[1]);
+                }
+                selectedCal.set(java.util.Calendar.HOUR_OF_DAY, hour);
+                selectedCal.set(java.util.Calendar.MINUTE, minute);
+                selectedCal.set(java.util.Calendar.SECOND, 0);
+                selectedCal.set(java.util.Calendar.MILLISECOND, 0);
                 java.util.Calendar now = java.util.Calendar.getInstance();
-                now.set(java.util.Calendar.HOUR_OF_DAY, 0);
-                now.set(java.util.Calendar.MINUTE, 0);
-                now.set(java.util.Calendar.SECOND, 0);
-                now.set(java.util.Calendar.MILLISECOND, 0);
-                java.util.Date today = now.getTime();
-                if (selectedDate.before(today)) {
+                if (selectedCal.getTime().before(now.getTime())) {
                     status = "missed";
                 } else {
                     status = "pending";
@@ -205,7 +233,7 @@ public class ServiceOrderActivity extends AppCompatActivity {
             } catch (Exception ex) {
                 status = "pending";
             }
-            ServiceOrder order = new ServiceOrder(serviceOrderId, serviceName, dateStr, noteText, selectedPetId, priceStr, status);
+            ServiceOrder order = new ServiceOrder(serviceOrderId, serviceName, dateStr, hourStr, noteText, selectedPetId, priceStr, status);
             serviceRef.child(serviceOrderId).setValue(order)
                     .addOnSuccessListener(aVoid -> {
                         Toast.makeText(ServiceOrderActivity.this, "Đặt dịch vụ thành công!", Toast.LENGTH_LONG).show();
@@ -223,6 +251,7 @@ public class ServiceOrderActivity extends AppCompatActivity {
         EditText edtOrderDate = findViewById(R.id.edtOrderDate);
         edtOrderDate.setOnClickListener(v -> {
             Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.DATE, 1);
             int year = calendar.get(Calendar.YEAR);
             int month = calendar.get(Calendar.MONTH);
             int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -235,6 +264,7 @@ public class ServiceOrderActivity extends AppCompatActivity {
                     },
                     year, month, day
             );
+            datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());
             datePickerDialog.show();
         });
 

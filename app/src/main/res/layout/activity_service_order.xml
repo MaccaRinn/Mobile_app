@@ -53,9 +53,23 @@
             android:background="#FFF"
             android:clickable="true"
             android:focusable="false"
-            android:hint="Chọn ngày"
+            android:hint="Chọn ngày hẹn"
             android:inputType="none"
             android:padding="12dp" />
+
+        <TextView
+            android:id="@+id/txtOrderHour"
+            android:layout_width="356dp"
+            android:layout_height="51dp"
+            android:layout_marginBottom="24dp"
+            android:background="#FFF"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:hint="Chọn giờ hẹn"
+            android:padding="12dp"
+            android:textColor="#000"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/txtPetChooser"

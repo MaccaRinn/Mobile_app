@@ -4,15 +4,17 @@ public class ServiceOrder {
     public String serviceOrderId;
     public String name;
     public String date;
+    public String hour; // giờ hẹn
     public String note;
     public String petId;
     public String price;
     public String status; // pending, missed, completed
     public ServiceOrder() {}
-    public ServiceOrder(String serviceOrderId, String name, String date, String note, String pet, String price, String status) {
+    public ServiceOrder(String serviceOrderId, String name, String date, String hour, String note, String pet, String price, String status) {
         this.serviceOrderId = serviceOrderId;
         this.name = name;
         this.date = date;
+        this.hour = hour;
         this.note = note;
         this.petId = pet;
         this.price = price;
@@ -24,6 +26,9 @@ public class ServiceOrder {
 
     public String getDate() { return date; }
     public void setDate(String date) { this.date = date; }
+
+    public String getHour() { return hour; }
+    public void setHour(String hour) { this.hour = hour; }
 
     public String getNote() { return note; }
     public void setNote(String note) { this.note = note; }

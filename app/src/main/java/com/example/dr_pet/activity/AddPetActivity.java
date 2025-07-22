@@ -142,10 +142,12 @@ public class AddPetActivity extends AppCompatActivity {
                         StringBuilder groomingDetails = new StringBuilder();
                         for (DataSnapshot serviceSnapshot : snapshot.getChildren()) {
                             String groomingDate = serviceSnapshot.child("date").getValue(String.class);
+                            String groomingHour = serviceSnapshot.child("hour").getValue(String.class);
                             String groomingNotes = serviceSnapshot.child("name").getValue(String.class);
                             String status = serviceSnapshot.child("status").getValue(String.class);
-                            groomingDetails.append(groomingDate)
-                                    .append(" - ").append(groomingNotes)
+                            groomingDetails.append(groomingDate != null ? groomingDate : "")
+                                    .append(groomingHour != null ? " - " + groomingHour : "")
+                                    .append(" - ").append(groomingNotes != null ? groomingNotes : "")
                                     .append(status != null ? " (" + status + ")" : "")
                                     .append("\n");
                         }
@@ -172,10 +174,12 @@ public class AddPetActivity extends AppCompatActivity {
                         StringBuilder boardingDetails = new StringBuilder();
                         for (DataSnapshot serviceSnapshot : snapshot.getChildren()) {
                             String boardingDate = serviceSnapshot.child("date").getValue(String.class);
+                            String boardingHour = serviceSnapshot.child("hour").getValue(String.class);
                             String boardingNotes = serviceSnapshot.child("name").getValue(String.class);
                             String status = serviceSnapshot.child("status").getValue(String.class);
-                            boardingDetails.append(boardingDate)
-                                    .append(" - ").append(boardingNotes)
+                            boardingDetails.append(boardingDate != null ? boardingDate : "")
+                                    .append(boardingHour != null ? " - " + boardingHour : "")
+                                    .append(" - ").append(boardingNotes != null ? boardingNotes : "")
                                     .append(status != null ? " (" + status + ")" : "")
                                     .append("\n");
                         }
