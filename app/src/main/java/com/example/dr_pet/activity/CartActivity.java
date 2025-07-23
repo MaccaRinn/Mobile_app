@@ -156,11 +156,12 @@ public class CartActivity extends AppCompatActivity implements CartManager.CartU
                 .setMessage("Bạn có chắc chắn muốn xóa toàn bộ sản phẩm trong giỏ hàng?")
                 .setPositiveButton("Xóa", (dialog, which) -> {
                     cartManager.clearCart();
-                    Toast.makeText(this, "Đã xóa toàn bộ giỏ hàng", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(this, "Đã xóa toàn bộ giỏ hàng", Toast.LENGTH_SHORT).show();
                 })
                 .setNegativeButton("Hủy", null)
                 .show();
     }
+
 
     private void proceedToCheckout() {
         if (cartManager.isCartEmpty()) {
@@ -168,23 +169,9 @@ public class CartActivity extends AppCompatActivity implements CartManager.CartU
             return;
         }
 
-        // TODO: Implement checkout logic
-        String summary = String.format(
-                "Đặt hàng thành công!\n\nTổng cộng: %d sản phẩm\nThành tiền: %s",
-                cartManager.getTotalItemCount(),
-                CartManager.formatCurrency(cartManager.getTotalAmount())
-        );
-
-        new AlertDialog.Builder(this)
-                .setTitle("Xác nhận đặt hàng")
-                .setMessage("Bạn có muốn đặt hàng với tổng tiền " +
-                        CartManager.formatCurrency(cartManager.getTotalAmount()) + "?")
-                .setPositiveButton("Đặt hàng", (dialog, which) -> {
-                    // Process order
-                    processOrder();
-                })
-                .setNegativeButton("Hủy", null)
-                .show();
+        // Navigate to CheckoutActivity
+        Intent intent = new Intent(this, CheckoutActivity.class);
+        startActivityForResult(intent, 1001);
     }
 
     private void processOrder() {

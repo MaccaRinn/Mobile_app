@@ -50,6 +50,15 @@
             android:name=".activity.ShopProductDetailActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.CheckoutActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".activity.OrderConfirmationActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".activity.CartActivity"
             android:exported="false"
             android:theme="@style/Theme.Dr_Pet" />
