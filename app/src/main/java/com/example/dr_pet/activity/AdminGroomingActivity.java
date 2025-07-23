@@ -30,7 +30,6 @@ import java.util.List;
 public class AdminGroomingActivity extends AppCompatActivity {
 
     RecyclerView groomingListRe;
-    List<String> groomingItems;
 
 
 

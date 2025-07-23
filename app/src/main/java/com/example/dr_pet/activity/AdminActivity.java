@@ -63,6 +63,7 @@ public class AdminActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 AuthManager.setLoggedIn(AdminActivity.this, false);
                 startActivity(new Intent(AdminActivity.this, HomeActivity.class));
+                finish();
                 Toast.makeText(AdminActivity.this, "Log out", Toast.LENGTH_SHORT).show();
             }
         });
