@@ -15,38 +15,38 @@
         />
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
         android:layout_weight="1"
-        android:layout_marginStart="12dp">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/txtHotelName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            android:textStyle="bold"
+            android:textColor="#222"
             android:textSize="16sp"
-            android:textColor="#222" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtHotelDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:text=""
-            android:textSize="13sp"
             android:textColor="#666"
-            android:layout_marginStart="4dp"/>
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/txtHotelPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:text=""
-            android:textSize="14sp"
             android:textColor="#00796B"
-            android:layout_marginTop="4dp"/>
+            android:textSize="14sp" />
 
     </LinearLayout>
 
