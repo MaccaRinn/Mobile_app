@@ -9,6 +9,5 @@
     <string-array name="services">
         <item>Tiêm phòng</item>
         <item>Triệt sản</item>
-        <item>Spa</item>
     </string-array>
 </resources>

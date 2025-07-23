@@ -5,11 +5,12 @@ import java.io.Serializable;
 public class Pet implements Serializable{
 
     private  String petId;
+    private  String userId; // Thêm trường userId
 
     private  String name;
     private  String species;
     private  double weight;
-    private  int petUrl;
+    private  int petUrl; // Đổi lại thành int để dùng resource ID như pet profile
     private  String gender;
     private String brithDate;
     private String note;
@@ -111,5 +112,13 @@ public class Pet implements Serializable{
 
     public void setHeight(double height) {
         this.height = height;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }
