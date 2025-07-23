@@ -42,6 +42,7 @@ public class AdminGroomingAdapter extends RecyclerView.Adapter<AdminGroomingAdap
         Grooming grooming = groomingList.get(position);
         holder.txtGName.setText(grooming.getName());
         holder.txtD.setText(grooming.getDate());
+        holder.txtPhone.setText(grooming.getPhone());
 
         holder.btn_deny.setOnClickListener(v -> {
             if (listener != null) {

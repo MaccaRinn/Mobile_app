@@ -54,18 +54,17 @@ public class AdminGroomingActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                    String phone = userSnapshot.child("phoneNumber").getValue(String.class);
                     DataSnapshot groomingSnapshot = userSnapshot.child("service").child("grooming");
-                    for (DataSnapshot boarding : groomingSnapshot.getChildren()) {
-                        String status = boarding.child("status").getValue(String.class);
+                    for (DataSnapshot groomingIdSnap : groomingSnapshot.getChildren()) {
+                        String status = groomingIdSnap.child("status").getValue(String.class);
                         if ("pending".equalsIgnoreCase(status)) {
-                            com.example.dr_pet.model.Grooming grooming = boarding.getValue(Grooming.class);
+                            com.example.dr_pet.model.Grooming grooming = groomingIdSnap.getValue(Grooming.class);
+                            grooming.setPhone(phone);
                             pendingList.add(grooming);
                         }
                     }
                 }
-
-                // Sau khi load xong → gán adapter
-
 
                 AdminGroomingAdapter adapter = new AdminGroomingAdapter(pendingList, new AdminGroomingAdapter.OnItemActionListener() {
                     @Override

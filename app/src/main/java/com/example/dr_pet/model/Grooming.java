@@ -7,21 +7,32 @@ public class Grooming {
     private String note;
     private String price;
 
+    private String phone;
+
     private String serviceOrderId;
 
     private String status;
 
-    public Grooming(String date, String status, String serviceOrderId, String price, String note, String name, String id) {
-        this.date = date;
-        this.status = status;
-        this.serviceOrderId = serviceOrderId;
-        this.price = price;
-        this.note = note;
-        this.name = name;
-        this.id = id;
+    public Grooming() {
     }
 
-    public Grooming() {
+    public Grooming(String date, String id, String name, String note, String price, String phone, String status, String serviceOrderId) {
+        this.date = date;
+        this.id = id;
+        this.name = name;
+        this.note = note;
+        this.price = price;
+        this.phone = phone;
+        this.status = status;
+        this.serviceOrderId = serviceOrderId;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getDate() {
