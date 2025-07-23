@@ -72,8 +72,7 @@ public class AdminActivity extends AppCompatActivity {
         btn_adminBoarding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                startActivity(new Intent(AdminActivity.this, AdminBoardingActivity.class));
             }
         });
 
@@ -88,7 +87,7 @@ public class AdminActivity extends AppCompatActivity {
         btn_adminMedical.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(AdminActivity.this, AdminMedicalActivity.class));
             }
         });
 
