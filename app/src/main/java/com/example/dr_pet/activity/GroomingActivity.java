@@ -18,7 +18,7 @@ import com.example.dr_pet.adapter.GroomingAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Grooming extends AppCompatActivity {
+public class GroomingActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private GroomingAdapter adapter;
     private List<GroomingService> serviceList;

@@ -153,7 +153,7 @@ public class AdminActivity extends AppCompatActivity {
     private void loadAdminData() {
         DatabaseReference accountRef = FirebaseDatabase.getInstance().getReference("Account");
 
-        accountRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        accountRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int totalPet = 0;

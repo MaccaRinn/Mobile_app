@@ -17,7 +17,7 @@ import com.example.dr_pet.activity.MedicalActivity;
 import com.example.dr_pet.model.Pet;
 import com.example.dr_pet.R;
 import com.example.dr_pet.activity.BoardingActivity;
-import com.example.dr_pet.activity.Grooming;
+import com.example.dr_pet.activity.GroomingActivity;
 import com.example.dr_pet.adapter.PetAdapter;
 import com.example.dr_pet.activity.ShopActivity;
 
@@ -95,7 +95,7 @@ public class HomeFragment extends Fragment {
         btnGrooming.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Grooming.class);
+                Intent intent = new Intent(getActivity(), GroomingActivity.class);
                 startActivity(intent);
             }
         });

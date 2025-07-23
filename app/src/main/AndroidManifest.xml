@@ -35,7 +35,7 @@
         <activity
             android:name=".activity.AddPetActivity"
             android:exported="false" />
-        <activity android:name=".activity.Grooming" />
+        <activity android:name=".activity.GroomingActivity" />
         <activity
             android:name=".activity.ShopActivity"
             android:exported="false" />
