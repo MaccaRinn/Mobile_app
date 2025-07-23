@@ -8,6 +8,7 @@ public class Appointment {
     private String service;
     private String petId;
     private String status;
+    private String userId;
 
     public Appointment() { }
 
@@ -47,4 +48,7 @@ public class Appointment {
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+
+    public String getUserId() { return userId; }
+    public void setUserId(String userId) { this.userId = userId; }
 }

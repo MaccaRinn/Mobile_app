@@ -15,6 +15,12 @@ import com.example.dr_pet.R;
 import com.example.dr_pet.adapter.MedicalAdapter;
 import com.example.dr_pet.model.AuthManager;
 import com.example.dr_pet.model.Pet;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +29,8 @@ public class MedicalActivity extends AppCompatActivity {
     private RecyclerView recyclerMedical;
     private MedicalAdapter adapter;
     private List<Pet> petList = new ArrayList<>();
+    private DatabaseReference petRef;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,9 @@ public class MedicalActivity extends AppCompatActivity {
             finish();
             return;
         }
+
+        auth = FirebaseAuth.getInstance();
+        petRef = FirebaseDatabase.getInstance().getReference("pets");
 
         bindingView();
         bindingAction();
@@ -62,10 +73,28 @@ public class MedicalActivity extends AppCompatActivity {
         loadPets();
     }
     private void loadPets() {
-        petList.add(new Pet("Bông", "Cat", 3, 1, R.drawable.bong, "Female", "16/01/2021", "Không có"));
-        petList.add(new Pet("Bi", "Cat", 4, 1.5, R.drawable.bi, "Female", "18/05/2023", "Không có"));
-        petList.add(new Pet("Miu", "Cat", 4, 1.5, R.drawable.miu, "Male", "02/04/2022", "Không có"));
+        if (auth.getCurrentUser() == null) return;
+        
+        String userId = auth.getCurrentUser().getUid();
+        DatabaseReference accountRef = FirebaseDatabase.getInstance().getReference("Account").child(userId).child("pet");
+        
+        accountRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                petList.clear();
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    Pet pet = data.getValue(Pet.class);
+                    if (pet != null) {
+                        pet.setPetId(data.getKey());
+                        petList.add(pet);
+                    }
+                }
+                adapter.setPets(petList);
+            }
 
-        adapter.setPets(petList);
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
+        });
     }
 }

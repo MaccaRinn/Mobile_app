@@ -137,77 +137,14 @@
 
 
         <Button
-            android:id="@+id/btnVaccine"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="#FDD991"
-            android:text="Vaccination Tracker"
-            android:textColor="#5C3B0C"
-            android:textAlignment="textStart" />
-
-        <!-- Vaccine Section -->
-        <LinearLayout
-            android:id="@+id/sectionVaccine"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="12dp"
-            android:visibility="gone"
-            android:background="#E0F7FA">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="12/02/2024 - Tiêm phòng dại\n12/05/2024 - Tiêm ngừa 5 bệnh"
-                android:textSize="14sp"
-                android:textColor="#004D40"/>
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btnGrooming"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:backgroundTint="#FDD991"
-            android:text="Grooming Tracker"
-            android:textAlignment="textStart"
-            android:textColor="#5C3B0C" />
-
-        <!-- Grooming Section -->
-        <LinearLayout
-            android:id="@+id/sectionGrooming"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="12dp"
-            android:visibility="gone"
-            android:background="#FFF8E1">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="12/02/2024 - Tiêm phòng dại\n12/05/2024 - Tiêm ngừa 5 bệnh"
-                android:textSize="14sp"
-                android:textColor="#004D40"/>
-        </LinearLayout>
-
-        <Button
             android:id="@+id/btnMedical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:backgroundTint="#FDD991"
             android:text="Medical"
             android:textColor="#5C3B0C"
             android:textAlignment="textStart" />
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btnDelete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#FFB4A2"
-        android:text="Delete this Pet"
-        android:textAlignment="textStart"
-        android:textColor="#D00000" />
 </LinearLayout>
