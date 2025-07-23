@@ -172,6 +172,7 @@ public class DetailActivity extends AppCompatActivity {
             DatabaseReference dbRef = FirebaseDatabase.getInstance()
                     .getReference("Account")
                     .child(uid)
+                    .child("service")
                     .child("appointments");
 
             if (appointmentId == null) {
