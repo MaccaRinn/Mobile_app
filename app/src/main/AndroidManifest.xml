@@ -17,6 +17,9 @@
         android:theme="@style/Theme.Dr_Pet"
         tools:targetApi="31">
         <activity
+            android:name=".activity.AdminMedical"
+            android:exported="false" />
+        <activity
             android:name=".activity.AdminGroomingActivity"
             android:exported="false" />
         <activity
