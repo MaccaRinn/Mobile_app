@@ -20,12 +20,15 @@ import android.widget.Toast;
 import android.view.inputmethod.EditorInfo;
 
 import com.example.dr_pet.R;
+import com.example.dr_pet.manager.CartManager;
+import com.example.dr_pet.model.Cart;
+import com.example.dr_pet.model.CartItem;
 import com.example.dr_pet.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShopActivity extends AppCompatActivity {
+public class ShopActivity extends AppCompatActivity implements CartManager.CartUpdateListener {
 
     private LinearLayout btnCategoryAll, btnCategoryDog, btnCategoryCat;
     private LinearLayout foodProduct1, foodProduct2;
@@ -33,6 +36,7 @@ public class ShopActivity extends AppCompatActivity {
     private ImageButton btnBack, btnCart, btnSearch;
     private EditText etSearch;
     private TextView btnSeeAllFood, btnSeeAllAccessories;
+    private TextView txtCartBadge; // Badge for cart
 
     // Product ImageViews và TextViews
     private ImageView imgFoodProduct1, imgFoodProduct2;
@@ -47,6 +51,9 @@ public class ShopActivity extends AppCompatActivity {
     private List<Product> filteredProducts;
     private String currentCategory = "all";
 
+    // CartManager
+    private CartManager cartManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,10 +66,17 @@ public class ShopActivity extends AppCompatActivity {
             return insets;
         });
 
+        // Initialize CartManager
+        cartManager = CartManager.getInstance();
+        cartManager.addCartUpdateListener(this);
+
         initViews();
         initProducts();
         setupClickListeners();
         updateProductDisplay();
+
+        // Update cart badge on start
+        updateCartBadge();
     }
 
     private void initViews() {
@@ -70,6 +84,9 @@ public class ShopActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
         btnCart = findViewById(R.id.btnCart);
         btnSearch = findViewById(R.id.btnSearch);
+
+        // Cart badge (thêm vào layout nếu chưa có)
+        txtCartBadge = findViewById(R.id.txtCartBadge); // Có thể null nếu chưa add vào layout
 
         // Search
         etSearch = findViewById(R.id.etSearch);
@@ -288,14 +305,15 @@ public class ShopActivity extends AppCompatActivity {
         filteredProducts = new ArrayList<>(allProducts);
     }
 
+
     private void setupClickListeners() {
         // Back button
         btnBack.setOnClickListener(v -> finish());
 
-        // Cart button
+        // Cart button - Navigate to CartActivity
         btnCart.setOnClickListener(v -> {
-            // TODO: Implement cart functionality
-            Toast.makeText(this, "Giỏ hàng - Chức năng đang phát triển", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, CartActivity.class);
+            startActivity(intent);
         });
 
         // Search button
@@ -429,22 +447,29 @@ public class ShopActivity extends AppCompatActivity {
         int displayedProducts = Math.min(foodProducts.size(), 2) + Math.min(accessoryProducts.size(), 2);
 
         if (totalProducts > displayedProducts && totalProducts > 0) {
-            Toast.makeText(this, "Tìm thấy " + totalProducts + " sản phẩm. Hiển thị " +
-                    displayedProducts + " sản phẩm đầu tiên.", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Tìm thấy " + totalProducts + " sản phẩm. Hiển thị " +
+//                    displayedProducts + " sản phẩm đầu tiên.", Toast.LENGTH_SHORT).show();
         }
 
-        // Cập nhật click listeners
+
         updateProductClickListeners(foodProducts, accessoryProducts);
     }
-
 
     private void updateProductContent(Product product, ImageView imageView, TextView nameView, TextView priceView) {
         imageView.setImageResource(product.getImageRes());
         nameView.setText(product.getName());
         priceView.setText(String.format("%,dđ", product.getPrice()));
+
+        // Add visual indicator if product is in cart
+        if (cartManager.isProductInCart(CartManager.generateProductId(product.getName(), product.getPrice()))) {
+            // You can add a small icon or change text color to indicate product is in cart
+            nameView.setTextColor(getResources().getColor(android.R.color.holo_blue_dark));
+        } else {
+            nameView.setTextColor(getResources().getColor(android.R.color.black));
+        }
     }
 
-    // Cập nhật click listeners cho từng sản phẩm cụ thể
+
     private void updateProductClickListeners(List<Product> foodProducts, List<Product> accessoryProducts) {
         // Food products click listeners
         if (foodProducts.size() > 0) {
@@ -473,6 +498,8 @@ public class ShopActivity extends AppCompatActivity {
         intent.putExtra("service_price", product.getPrice());
         intent.putExtra("service_img", product.getImageRes());
         intent.putExtra("service_description", product.getDescription());
+        intent.putExtra("product_type", product.getType());
+        intent.putExtra("product_category", product.getCategory());
         startActivity(intent);
     }
 
@@ -482,4 +509,80 @@ public class ShopActivity extends AppCompatActivity {
         intent.putExtra("current_category", currentCategory);
         startActivity(intent);
     }
+
+
+    private void updateCartBadge() {
+        int cartCount = cartManager.getTotalItemCount();
+
+        if (txtCartBadge != null) {
+            if (cartCount > 0) {
+                txtCartBadge.setVisibility(View.VISIBLE);
+                txtCartBadge.setText(cartCount > 99 ? "99+" : String.valueOf(cartCount));
+            } else {
+                txtCartBadge.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    @Override
+    public void onCartUpdated(Cart cart) {
+        runOnUiThread(() -> {
+            updateCartBadge();
+            updateProductDisplay(); // Refresh product colors if in cart
+        });
+    }
+
+    @Override
+    public void onCartItemAdded(CartItem item) {
+        runOnUiThread(() -> {
+            updateCartBadge();
+            updateProductDisplay();
+            Toast.makeText(this, "Đã thêm " + item.getProductName() + " vào giỏ hàng",
+                    Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    @Override
+    public void onCartItemRemoved(String productId) {
+        runOnUiThread(() -> {
+            updateCartBadge();
+            updateProductDisplay();
+        });
+    }
+
+    @Override
+    public void onCartItemQuantityChanged(String productId, int newQuantity) {
+        runOnUiThread(() -> {
+            updateCartBadge();
+        });
+    }
+
+    @Override
+    public void onCartCleared() {
+        runOnUiThread(() -> {
+            updateCartBadge();
+            updateProductDisplay();
+            Toast.makeText(this, "Đã xóa toàn bộ giỏ hàng", Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Remove listener to prevent memory leaks
+        if (cartManager != null) {
+            cartManager.removeCartUpdateListener(this);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Update cart badge when returning to this activity
+        updateCartBadge();
+        updateProductDisplay();
+    }
 }
+
+
+
