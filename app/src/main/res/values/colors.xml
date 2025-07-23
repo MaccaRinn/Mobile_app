@@ -5,4 +5,6 @@
     <color name="lavender">#8692f7</color>
     <color name="orange_500">#FB8C00</color>
     <color name="orange_600">#F57C00</color>
+    <color name="background_color">#FFFFFF</color>
+
 </resources>
