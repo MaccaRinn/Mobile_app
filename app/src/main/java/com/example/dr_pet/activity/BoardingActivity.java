@@ -34,8 +34,8 @@ public class BoardingActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerBoarding);
         List<HotelOption> hotelOptions = new ArrayList<>();
         hotelOptions.add(new HotelOption("Khách sạn A", "Phòng riêng, có camera giám sát 24/7, điều hòa, thức ăn cao cấp", 200000, R.drawable.miu));
-        hotelOptions.add(new HotelOption("Khách sạn B", "Phòng tập thể, giám sát định kỳ, thức ăn tiêu chuẩn", 120000, R.drawable.miu));
-        hotelOptions.add(new HotelOption("Khách sạn C", "Phòng cơ bản, không điều hòa, tự mang thức ăn", 80000, R.drawable.miu));
+        hotelOptions.add(new HotelOption("Khách sạn B", "Phòng tập thể, giám sát định kỳ, điều hòa, thức ăn tiêu chuẩn", 120000, R.drawable.miu));
+        hotelOptions.add(new HotelOption("Khách sạn C", "Phòng tập thể, giám sát định kỳ, thức ăn tiêu chuẩn ", 80000, R.drawable.miu));
         BoardingAdapter adapter = new BoardingAdapter(hotelOptions, option -> {
             android.content.Intent intent = new android.content.Intent(BoardingActivity.this, ServiceOrderActivity.class);
             intent.putExtra("service_type", "boarding");
