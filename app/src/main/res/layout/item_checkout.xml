@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:background="@drawable/checkout_item_background"
+    android:layout_marginVertical="4dp">
+
+    <!-- Product Image -->
+    <ImageView
+        android:id="@+id/imgCheckoutProduct"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="12dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/image_background"
+        android:src="@drawable/hatmeo" />
+
+    <!-- Product Info -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- Product Name -->
+        <TextView
+            android:id="@+id/txtCheckoutProductName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hạt mèo Catsrang túi 5kg"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:maxLines="2"
+            android:ellipsize="end" />
+
+        <!-- Product Category -->
+        <TextView
+            android:id="@+id/txtCheckoutProductCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="🐱 Thức ăn"
+            android:textSize="11sp"
+            android:textColor="@android:color/holo_orange_dark" />
+
+        <!-- Price & Quantity Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Unit Price -->
+            <TextView
+                android:id="@+id/txtCheckoutProductPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="460,000 VND"
+                android:textSize="12sp"
+                android:textColor="@android:color/darker_gray" />
+
+            <!-- Quantity -->
+            <TextView
+                android:id="@+id/txtCheckoutQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="x2"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:background="@drawable/quantity_display_background"
+                android:padding="4dp"
+                android:minWidth="32dp"
+                android:gravity="center" />
+
+            <!-- Spacer -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <!-- Total Price -->
+            <TextView
+                android:id="@+id/txtCheckoutTotalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="920,000 VND"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/holo_red_dark" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
