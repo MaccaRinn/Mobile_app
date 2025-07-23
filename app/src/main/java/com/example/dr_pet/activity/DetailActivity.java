@@ -154,7 +154,6 @@ public class DetailActivity extends AppCompatActivity {
             }
 
             String uid = auth.getCurrentUser().getUid();
-            // Lưu giống như grooming/boarding: Account/{userId}/service/{serviceType}
             DatabaseReference dbRef = FirebaseDatabase.getInstance()
                     .getReference("Account")
                     .child(uid)
@@ -188,11 +187,6 @@ public class DetailActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Kiểm tra ngày đặt lịch có hợp lệ không (phải từ ngày mai trở đi)
-     * @param dateString Ngày dạng dd/MM/yyyy
-     * @return true nếu hợp lệ, false nếu không hợp lệ
-     */
     private boolean isValidBookingDate(String dateString) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         try {
