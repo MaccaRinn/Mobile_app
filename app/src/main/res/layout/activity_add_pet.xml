@@ -201,6 +201,41 @@
             android:textColor="#004D40"/>
     </LinearLayout>
 
+    <!-- Medical Button -->
+    <Button
+        android:id="@+id/btn_medical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#FDD991"
+        android:text="Medical History"
+        android:textColor="#5C3B0C"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/section_boarding" />
+
+    <!-- Medical Section -->
+    <LinearLayout
+        android:id="@+id/section_medical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:visibility="gone"
+        android:background="#F3E5F5"
+        app:layout_constraintTop_toBottomOf="@id/btn_medical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <TextView
+            android:id="@+id/txtMedicalDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="14sp"
+            android:textColor="#004D40"/>
+    </LinearLayout>
+
     <!-- Grooming Button -->
 
     <!-- Grooming Section -->
@@ -216,7 +251,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/section_boarding" />
+        app:layout_constraintTop_toBottomOf="@id/section_medical" />
 
     <LinearLayout
         android:id="@+id/section_grooming"
@@ -284,13 +319,6 @@
             app:layout_constraintVertical_bias="0.984" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="3dp"
-        android:text="Cắt móng: 10/06/2024\nTắm: 20/06/2024"
-        android:textColor="#6A4E0B"
-        android:textSize="14sp"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="50dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

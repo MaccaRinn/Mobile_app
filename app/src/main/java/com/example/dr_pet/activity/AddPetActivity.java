@@ -40,7 +40,7 @@ public class AddPetActivity extends AppCompatActivity {
 
     ImageButton btn_back;
 
-    LinearLayout sectionGrowth, sectionGrooming, sectionBoarding;
+    LinearLayout sectionGrowth, sectionGrooming, sectionBoarding, sectionMedical;
 
     ImageView  imagePet;
 
@@ -50,7 +50,7 @@ public class AddPetActivity extends AppCompatActivity {
 
     String petId;
 
-    TextView txtGroomingDetail, txtBoardingDetail;
+    TextView txtGroomingDetail, txtBoardingDetail, txtMedicalDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,24 +65,28 @@ public class AddPetActivity extends AppCompatActivity {
         btn_growth = findViewById(R.id.btn_growth);
         btn_boarding = findViewById(R.id.btn_boarding);
         btn_grooming = findViewById(R.id.btn_grooming);
+        btn_medical = findViewById(R.id.btn_medical);
 
         btn_delete = findViewById(R.id.btn_delete);
         btn_savePet = findViewById(R.id.btn_savePet);
         sectionGrooming = findViewById(R.id.section_grooming);
         sectionGrowth = findViewById(R.id.section_growth);
         sectionBoarding = findViewById(R.id.section_boarding);
+        sectionMedical = findViewById(R.id.section_medical);
 
         txtGroomingDetail = findViewById(R.id.txtGroomingDetail);
         txtBoardingDetail = findViewById(R.id.txtBoardingDetail);
+        txtMedicalDetail = findViewById(R.id.txtMedicalDetail);
 
 
         LinearLayout[] allSections = {
-               sectionBoarding,sectionGrooming,sectionGrowth
+               sectionBoarding,sectionGrooming,sectionGrowth,sectionMedical
         };
 
         setupToggle(btn_growth, sectionGrowth, allSections);
         setupToggle(btn_boarding, sectionBoarding, allSections);
         setupToggle(btn_grooming, sectionGrooming, allSections);
+        setupToggle(btn_medical, sectionMedical, allSections);
 
 
         imagePet = findViewById(R.id.imagePet);
@@ -186,6 +190,35 @@ public class AddPetActivity extends AppCompatActivity {
                         txtBoardingDetail.setText(boardingDetails.toString());
                     } else {
                         txtBoardingDetail.setText("No boarding details available.");
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+
+
+            //Medical history
+            DatabaseReference medicalRef = FirebaseDatabase.getInstance().getReference("Account")
+                    .child(uid).child("service").child("medical");
+
+            medicalRef.orderByChild("petId").equalTo(petId).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        StringBuilder medicalDetails = new StringBuilder();
+                        for (DataSnapshot serviceSnapshot : snapshot.getChildren()) {
+                            String medicalDate = serviceSnapshot.child("date").getValue(String.class);
+                            String medicalService = serviceSnapshot.child("service").getValue(String.class);
+                            String status = serviceSnapshot.child("status").getValue(String.class);
+                            medicalDetails.append(medicalDate != null ? medicalDate : "")
+                                    .append(" - ").append(medicalService != null ? medicalService : "")
+                                    .append(status != null ? " (" + status + ")" : "")
+                                    .append("\n");
+                        }
+                        txtMedicalDetail.setText(medicalDetails.toString());
+                    } else {
+                        txtMedicalDetail.setText("No medical details available.");
                     }
                 }
                 @Override
