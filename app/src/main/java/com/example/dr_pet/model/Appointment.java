@@ -8,7 +8,7 @@ public class Appointment {
     private String service;
     private String petId;
     private String status;
-    private String userId; // Thêm userId để biết appointment thuộc về user nào
+    private String userId;
 
     public Appointment() { }
 
