@@ -8,16 +8,12 @@ import android.util.Log;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dr_pet.R;
-import com.example.dr_pet.adapter.AdminGroomingAdapter;
-import com.example.dr_pet.adapter.GroomingAdapter;
-import com.example.dr_pet.model.Grooming;
+import com.example.dr_pet.adapter.AdminMedicalAdapter;
+import com.example.dr_pet.model.Medical;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,27 +23,28 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminGroomingActivity extends AppCompatActivity {
+public class AdminMedicalActivity extends AppCompatActivity {
 
-    RecyclerView groomingListRe;
-
-
+    RecyclerView medicalListRe;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_admin_grooming);
-        groomingListRe = findViewById(R.id.groomingListRe);
-        groomingListRe.setLayoutManager(new LinearLayoutManager(this));
+        setContentView(R.layout.activity_admin_medical);
+        medicalListRe = findViewById(R.id.medicalListRe);
+        medicalListRe.setLayoutManager(new LinearLayoutManager(this));
 
-        //load grooming list
-        loadPendingGroomings();
+        loadPendingMedicals();
+
+
+
     }
 
-    private void loadPendingGroomings() {
-        List<com.example.dr_pet.model.Grooming> pendingList = new ArrayList<>();
+
+    private void loadPendingMedicals() {
+        List<com.example.dr_pet.model.Medical> pendingList = new ArrayList<>();
 
         DatabaseReference accountRef = FirebaseDatabase.getInstance().getReference("Account");
 
@@ -56,31 +53,31 @@ public class AdminGroomingActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                     String phone = userSnapshot.child("phoneNumber").getValue(String.class);
-                    DataSnapshot groomingSnapshot = userSnapshot.child("service").child("grooming");
-                    for (DataSnapshot groomingIdSnap : groomingSnapshot.getChildren()) {
-                        String status = groomingIdSnap.child("status").getValue(String.class);
+                    DataSnapshot medicalSnapshot = userSnapshot.child("service").child("medical");  // Changed to medical
+                    for (DataSnapshot medicalIdSnap : medicalSnapshot.getChildren()) {
+                        String status = medicalIdSnap.child("status").getValue(String.class);
                         if ("pending".equalsIgnoreCase(status)) {
-                            com.example.dr_pet.model.Grooming grooming = groomingIdSnap.getValue(Grooming.class);
-                            grooming.setPhone(phone);
-                            pendingList.add(grooming);
+                            com.example.dr_pet.model.Medical medical = medicalIdSnap.getValue(Medical.class);
+                            medical.setPhone(phone);
+                            pendingList.add(medical);
                         }
                     }
                 }
 
-                AdminGroomingAdapter adapter = new AdminGroomingAdapter(pendingList, new AdminGroomingAdapter.OnItemActionListener() {
+                AdminMedicalAdapter adapter = new AdminMedicalAdapter(pendingList, new AdminMedicalAdapter.OnItemActionListener() {
                     @Override
-                    public void onDeny(Grooming grooming) {
-                        deleteGrooming(grooming);
+                    public void onDenyM(Medical medical) {
+                        deleteMedical(medical);
                     }
 
                     @Override
-                    public void onAccept(Grooming grooming) {
-                        completeGrooming(grooming);
+                    public void onAcceptM(Medical medical) {
+                        completeMedical(medical);
                     }
 
                     @Override
-                    public void onCall(Grooming grooming) {
-                        String phoneNumber = grooming.getPhone();
+                    public void onCallM(Medical medical) {
+                        String phoneNumber = medical.getPhone();
                         if (phoneNumber != null && !phoneNumber.isEmpty()) {
                             Intent intent = new Intent(Intent.ACTION_DIAL);
                             intent.setData(Uri.parse("tel:" + phoneNumber));
@@ -89,7 +86,7 @@ public class AdminGroomingActivity extends AppCompatActivity {
                     }
                 });
 
-                groomingListRe.setAdapter(adapter);
+                medicalListRe.setAdapter(adapter);
             }
 
             @Override
@@ -97,10 +94,14 @@ public class AdminGroomingActivity extends AppCompatActivity {
                 Log.e("FirebaseError", error.getMessage());
             }
         });
+
+
+
     }
 
-    private void completeGrooming(Grooming grooming) {
-        String targetId = grooming.getId();
+
+    private void completeMedical(Medical medical) {
+        String targetId = medical.getAppointmentId();
 
         DatabaseReference accountRef = FirebaseDatabase.getInstance().getReference("Account");
 
@@ -108,28 +109,28 @@ public class AdminGroomingActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                    DataSnapshot groomingList = userSnapshot.child("service").child("grooming");
-                    for (DataSnapshot groomingItem : groomingList.getChildren()) {
-                        if (groomingItem.getKey().equals(targetId)) {
-                            groomingItem.getRef().child("status").setValue("complete");
-                            Log.d("Update", "Đã cập nhật grooming ID " + targetId + " thành 'complete'");
+                    DataSnapshot medicalList = userSnapshot.child("service").child("medical");  // Changed to medical
+                    for (DataSnapshot medicalItem : medicalList.getChildren()) {
+                        if (medicalItem.getKey().equals(targetId)) {
+                            medicalItem.getRef().child("status").setValue("complete");
+                            Log.d("Update", "Đã cập nhật medical ID " + targetId + " thành 'complete'");
                             break;
                         }
                     }
                 }
-                loadPendingGroomings();
+                loadPendingMedicals();  // Load pending medicals after update
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("FirebaseError", "Lỗi khi cập nhật grooming: " + error.getMessage());
+                Log.e("FirebaseError", "Lỗi khi cập nhật medical: " + error.getMessage());
             }
         });
     }
 
 
-    private void deleteGrooming(Grooming grooming) {
-        String targetId = grooming.getId();
+    private void deleteMedical(Medical medical) {
+        String targetId = medical.getAppointmentId();
 
         DatabaseReference accountRef = FirebaseDatabase.getInstance().getReference("Account");
 
@@ -137,23 +138,26 @@ public class AdminGroomingActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                    DataSnapshot groomingList = userSnapshot.child("service").child("grooming");
-                    for (DataSnapshot groomingItem : groomingList.getChildren()) {
-                        if (groomingItem.getKey().equals(targetId)) {
-                            groomingItem.getRef().child("status").setValue("Deny"); // Xoá ở đây
-                            Log.d("Delete", "Xoá grooming id = " + targetId);
+                    DataSnapshot medicalList = userSnapshot.child("service").child("medical");  // Changed to medical
+                    for (DataSnapshot medicalItem : medicalList.getChildren()) {
+                        if (medicalItem.getKey().equals(targetId)) {
+                            medicalItem.getRef().child("status").setValue("Deny"); // Deny instead of deletion
+                            Log.d("Delete", "Xoá medical id = " + targetId);
                             break;
                         }
                     }
                 }
-                loadPendingGroomings();
+                loadPendingMedicals();  // Load pending medicals after update
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("FirebaseError", "Lỗi xoá grooming: " + error.getMessage());
+                Log.e("FirebaseError", "Lỗi xoá medical: " + error.getMessage());
             }
         });
     }
+
+
+
 
 }

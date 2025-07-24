@@ -8,15 +8,14 @@ import android.util.Log;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.example.dr_pet.R;
+import com.example.dr_pet.adapter.AdminBoardingAdapter;
 import com.example.dr_pet.adapter.AdminGroomingAdapter;
-import com.example.dr_pet.adapter.GroomingAdapter;
+import com.example.dr_pet.model.Boarding;
 import com.example.dr_pet.model.Grooming;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,27 +26,29 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminGroomingActivity extends AppCompatActivity {
+public class AdminBoardingActivity extends AppCompatActivity {
 
-    RecyclerView groomingListRe;
+    private RecyclerView boardingListRe;
 
-
+    private List<Boarding> boardingList;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_admin_grooming);
-        groomingListRe = findViewById(R.id.groomingListRe);
-        groomingListRe.setLayoutManager(new LinearLayoutManager(this));
+        setContentView(R.layout.activity_admin_boarding);
+        boardingListRe = findViewById(R.id.boardingListRe);
+        boardingListRe.setLayoutManager(new LinearLayoutManager(this));
+        loadPendingBoarding();
 
-        //load grooming list
-        loadPendingGroomings();
+
+
     }
 
-    private void loadPendingGroomings() {
-        List<com.example.dr_pet.model.Grooming> pendingList = new ArrayList<>();
+
+    private void loadPendingBoarding() {
+        List<Boarding> pendingList = new ArrayList<>();
 
         DatabaseReference accountRef = FirebaseDatabase.getInstance().getReference("Account");
 
@@ -56,31 +57,31 @@ public class AdminGroomingActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                     String phone = userSnapshot.child("phoneNumber").getValue(String.class);
-                    DataSnapshot groomingSnapshot = userSnapshot.child("service").child("grooming");
-                    for (DataSnapshot groomingIdSnap : groomingSnapshot.getChildren()) {
-                        String status = groomingIdSnap.child("status").getValue(String.class);
+                    DataSnapshot boardingSnapshot = userSnapshot.child("service").child("boarding");
+                    for (DataSnapshot boardingIdSnap : boardingSnapshot.getChildren()) {
+                        String status = boardingIdSnap.child("status").getValue(String.class);
                         if ("pending".equalsIgnoreCase(status)) {
-                            com.example.dr_pet.model.Grooming grooming = groomingIdSnap.getValue(Grooming.class);
-                            grooming.setPhone(phone);
-                            pendingList.add(grooming);
+                            Boarding boarding = boardingIdSnap.getValue(Boarding.class);
+                            boarding.setPhone(phone);
+                            pendingList.add(boarding);
                         }
                     }
                 }
 
-                AdminGroomingAdapter adapter = new AdminGroomingAdapter(pendingList, new AdminGroomingAdapter.OnItemActionListener() {
+                AdminBoardingAdapter adapter = new AdminBoardingAdapter(pendingList, new AdminBoardingAdapter.OnItemActionListener() {
                     @Override
-                    public void onDeny(Grooming grooming) {
-                        deleteGrooming(grooming);
+                    public void onDenyB(Boarding boarding) {
+                        deleteBoarding(boarding);
                     }
 
                     @Override
-                    public void onAccept(Grooming grooming) {
-                        completeGrooming(grooming);
+                    public void onAcceptB(Boarding boarding) {
+                        completeBoarding(boarding);
                     }
 
                     @Override
-                    public void onCall(Grooming grooming) {
-                        String phoneNumber = grooming.getPhone();
+                    public void onCallB(Boarding boarding) {
+                        String phoneNumber = boarding.getPhone();
                         if (phoneNumber != null && !phoneNumber.isEmpty()) {
                             Intent intent = new Intent(Intent.ACTION_DIAL);
                             intent.setData(Uri.parse("tel:" + phoneNumber));
@@ -89,7 +90,7 @@ public class AdminGroomingActivity extends AppCompatActivity {
                     }
                 });
 
-                groomingListRe.setAdapter(adapter);
+                boardingListRe.setAdapter(adapter);
             }
 
             @Override
@@ -99,8 +100,8 @@ public class AdminGroomingActivity extends AppCompatActivity {
         });
     }
 
-    private void completeGrooming(Grooming grooming) {
-        String targetId = grooming.getId();
+    private void deleteBoarding(Boarding boarding) {
+        String targetId = boarding.getId();
 
         DatabaseReference accountRef = FirebaseDatabase.getInstance().getReference("Account");
 
@@ -108,28 +109,28 @@ public class AdminGroomingActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                    DataSnapshot groomingList = userSnapshot.child("service").child("grooming");
-                    for (DataSnapshot groomingItem : groomingList.getChildren()) {
-                        if (groomingItem.getKey().equals(targetId)) {
-                            groomingItem.getRef().child("status").setValue("complete");
-                            Log.d("Update", "Đã cập nhật grooming ID " + targetId + " thành 'complete'");
+                    DataSnapshot boardingList = userSnapshot.child("service").child("boarding");
+                    for (DataSnapshot boardingItem : boardingList.getChildren()) {
+                        if (boardingItem.getKey().equals(targetId)) {
+                            boardingItem.getRef().child("status").setValue(""); // Xoá ở đây
+                            Log.d("Delete", "Xoá boarding id = " + targetId);
                             break;
                         }
                     }
                 }
-                loadPendingGroomings();
+                loadPendingBoarding();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("FirebaseError", "Lỗi khi cập nhật grooming: " + error.getMessage());
+                Log.e("FirebaseError", "Lỗi xoá boarding: " + error.getMessage());
             }
         });
     }
 
 
-    private void deleteGrooming(Grooming grooming) {
-        String targetId = grooming.getId();
+    private void completeBoarding(Boarding boarding) {
+        String targetId = boarding.getId();
 
         DatabaseReference accountRef = FirebaseDatabase.getInstance().getReference("Account");
 
@@ -137,23 +138,24 @@ public class AdminGroomingActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                    DataSnapshot groomingList = userSnapshot.child("service").child("grooming");
-                    for (DataSnapshot groomingItem : groomingList.getChildren()) {
-                        if (groomingItem.getKey().equals(targetId)) {
-                            groomingItem.getRef().child("status").setValue("Deny"); // Xoá ở đây
-                            Log.d("Delete", "Xoá grooming id = " + targetId);
+                    DataSnapshot boardingList = userSnapshot.child("service").child("boarding");
+                    for (DataSnapshot boardingItem : boardingList.getChildren()) {
+                        if (boardingItem.getKey().equals(targetId)) {
+                            boardingItem.getRef().child("status").setValue("complete");
+                            Log.d("Update", "Đã cập nhật boarding ID " + targetId + " thành 'complete'");
                             break;
                         }
                     }
                 }
-                loadPendingGroomings();
+                loadPendingBoarding();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("FirebaseError", "Lỗi xoá grooming: " + error.getMessage());
+                Log.e("FirebaseError", "Lỗi khi cập nhật boarding: " + error.getMessage());
             }
         });
     }
+
 
 }

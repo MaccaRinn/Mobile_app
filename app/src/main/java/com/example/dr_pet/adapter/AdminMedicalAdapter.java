@@ -3,7 +3,6 @@ package com.example.dr_pet.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -13,24 +12,29 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.dr_pet.R;
 import com.example.dr_pet.model.Boarding;
 import com.example.dr_pet.model.Grooming;
+import com.example.dr_pet.model.Medical;
 
 import java.util.List;
 
-public class AdminGroomingAdapter extends RecyclerView.Adapter<AdminGroomingAdapter.ViewHolder> {
-    private List<Grooming> groomingList;
+public class AdminMedicalAdapter extends RecyclerView.Adapter<AdminMedicalAdapter.ViewHolder>{
+
+
+    private List<Medical> medicalList;
     private OnItemActionListener listener;
 
-    public interface OnItemActionListener {
-        void onDeny(Grooming grooming);
-        void onAccept(Grooming grooming);
 
-        void onCall(Grooming grooming);
+    public interface OnItemActionListener {
+        void onDenyM(Medical medical);
+        void onAcceptM(Medical medical);
+
+        void onCallM(Medical medical);
     }
 
-    public AdminGroomingAdapter(List<Grooming> groomingList, OnItemActionListener listener) {
-        this.groomingList = groomingList;
+    public AdminMedicalAdapter(List<Medical> medicalList, AdminMedicalAdapter.OnItemActionListener listener) {
+        this.medicalList = medicalList;
         this.listener = listener;
     }
+
 
     @NonNull
     @Override
@@ -40,35 +44,38 @@ public class AdminGroomingAdapter extends RecyclerView.Adapter<AdminGroomingAdap
         return new ViewHolder(view);
     }
 
+
+
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Grooming grooming = groomingList.get(position);
-        holder.txtGName.setText(grooming.getName());
-        holder.txtD.setText(grooming.getDate());
-        holder.txtPhone.setText(grooming.getPhone());
+    public void onBindViewHolder(@NonNull AdminMedicalAdapter.ViewHolder holder, int position) {
+        Medical medical = medicalList.get(position);
+        holder.txtGName.setText(medical.getName());
+        holder.txtD.setText(medical.getDate());
+        holder.txtPhone.setText(medical.getPhone());
 
 
         holder.btn_deny.setOnClickListener(v -> {
             if (listener != null) {
-                listener.onDeny(grooming); // Gọi callback xoá
+                listener.onDenyM(medical); // Gọi callback xoá
             }
         });
         holder.btn_accept.setOnClickListener(v->{
             if (listener != null){
-                listener.onAccept(grooming);
+                listener.onAcceptM(medical);
             }
         });
         holder.btn_call.setOnClickListener(v -> {
             if (listener != null){
                 //
-                listener.onCall(grooming);
+                listener.onCallM(medical);
             }
         });
+
     }
 
     @Override
     public int getItemCount() {
-        return groomingList.size();
+        return medicalList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -86,4 +93,3 @@ public class AdminGroomingAdapter extends RecyclerView.Adapter<AdminGroomingAdap
         }
     }
 }
-

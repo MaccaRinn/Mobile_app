@@ -105,6 +105,8 @@ public class AddPetActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_species.setAdapter(adapter);
 
+
+
         // Date picker setup
         edt_birthDate.setOnClickListener(v -> {
             final Calendar calendar = Calendar.getInstance();

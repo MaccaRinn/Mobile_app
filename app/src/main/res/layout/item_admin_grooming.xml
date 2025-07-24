@@ -67,7 +67,7 @@
         android:layout_marginTop="44dp"
         android:text="Accept"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.244"
+        app:layout_constraintHorizontal_bias="0.031"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
@@ -78,7 +78,7 @@
         android:layout_marginTop="44dp"
         android:text="Deny"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintHorizontal_bias="0.107"
         app:layout_constraintStart_toEndOf="@+id/btn_accept"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
@@ -113,5 +113,16 @@
         app:layout_constraintHorizontal_bias="0.543"
         app:layout_constraintStart_toEndOf="@+id/textView12"
         app:layout_constraintTop_toBottomOf="@+id/txtD" />
+
+    <Button
+        android:id="@+id/btn_call"
+        android:layout_width="96dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="44dp"
+        android:text=" Call"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toEndOf="@+id/btn_deny"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
